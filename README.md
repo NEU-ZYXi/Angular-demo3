@@ -1,3 +1,3 @@
 # CS5610
 
-Welcome to Zhenyuan Xi's CS5610 github repo
+Welcome to Zhenyuan Xi's CS5610 projects
