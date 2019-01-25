@@ -10,10 +10,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist -- For building -- REMOVE
-// app.use(express.static(path.join(__dirname, 'dist')));
-app.get('/', function (req, res) {
-  res.send('<html><body><h1>Hello World</h1></body></html>');
-});
+app.use(express.static(path.join(__dirname, 'dist/my-project')));
+
 // CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
