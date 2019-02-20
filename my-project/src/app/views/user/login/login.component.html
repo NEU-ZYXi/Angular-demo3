@@ -1,0 +1,58 @@
+<div class="container">
+  <div
+    *ngIf="errorFlag"
+    class="alert alert-danger">
+    <h1>{{ errorMessage }}</h1>
+    <hr>
+    <a routerLink="login" (click)="reload()">Back</a>
+  </div>
+
+  <div *ngIf="!errorFlag">
+    <h1>Login</h1>
+    <form
+      (ngSubmit)="onLogin()"
+      #form='ngForm'>
+      <div class="form-group">
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="username"
+          ngModel
+          required
+          #username="ngModel">
+        <span
+          class="help-block"
+          *ngIf="!username.valid && username.touched">
+          Please enter a username
+        </span>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="password"
+          ngModel
+          required
+          #password="ngModel">
+        <span
+          class="help-block"
+          *ngIf="!password.valid && password.touched">
+          Please enter a password
+        </span>
+      </div>
+      <div class="form-group">
+        <button
+          class="btn btn-primary btn-block"
+          type="submit"
+          [disabled]="!form.valid">
+          Login
+        </button>
+      </div>
+      <div class="form-group">
+        <a class="btn btn-success btn-block" routerLink="/register">Register</a>
+      </div>
+    </form>
+  </div>
+</div>

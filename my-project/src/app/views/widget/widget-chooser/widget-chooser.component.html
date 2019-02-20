@@ -1,0 +1,58 @@
+<nav class="navbar fixed-top bc-grey">
+  <div class="container-fluid">
+    <div class="navbar-brand navbar-light">
+      <a routerLink="../" class="float-left text-black">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="./" class="text-grey">
+        Choose Widget
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <ul class="list-group">
+    <li class="list-group-item border-0">
+      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('HEADING')">Header</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Label</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">HTML</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Text Input</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Link</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Button</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('IMAGE')">Image</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('YOUTUBE')">YouTube</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Date Table</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a routerLink="./" class="text-blue">Repeater</a>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar fixed-bottom bc-grey">
+  <div class="container-fluid">
+    <div class="ml-auto">
+      <a [routerLink]="['/user', userId]" class="text-blue float-right">
+        <i class="fas fa-user"></i>
+      </a>
+    </div>
+  </div>
+</nav>
