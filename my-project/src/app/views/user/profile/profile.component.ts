@@ -13,11 +13,6 @@ export class ProfileComponent implements OnInit {
   userId: string;
   username: string;
   user: User;
-  newUsername: string = '';
-  newEmail: string = '';
-  newFirstName: string = '';
-  newLastName: string = '';
-  newUser: User;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
 
@@ -35,21 +30,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onUpdateUser() {
-    if (this.newUsername === '') {
-      this.newUsername = this.username;
-    }
-    if (this.newEmail === '') {
-      // @ts-ignore
-      this.newEmail = this.user.email;
-    }
-    if (this.newFirstName === '') {
-      this.newFirstName = this.user.firstName;
-    }
-    if (this.newLastName === '') {
-      this.newLastName = this.user.lastName;
-    }
-    this.newUser = new User(this.userId, this.newUsername, this.user.password, this.newFirstName, this.newLastName);
-    this.userService.updateUser(this.userId, this.newUser);
+    this.userService.updateUser(this.userId, this.user);
     alert("successfully update your profile");
   }
 

@@ -15,9 +15,6 @@ export class WebsiteEditComponent implements OnInit {
   userId: string;
   websiteId: string;
   website: Website;
-  newWebsite: Website;
-  newWebsiteName: string = '';
-  newWebsiteDescription: string = '';
   websites: Website[];
   websiteIdObs = new Subject<string>();
   @ViewChild('f') websiteForm: NgForm;
@@ -48,16 +45,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   onEditWebsite() {
-    // this.newWebsiteName = this.websiteForm.value.websiteName === '' ? this.website.name : this.websiteForm.value.websiteName;
-    // this.newWebsiteDescription = this.websiteForm.value.websiteDescription === '' ? this.website.description : this.websiteForm.value.websiteDescription;
-    if (this.newWebsiteName === '') {
-      this.newWebsiteName = this.website.name;
-    }
-    if (this.newWebsiteDescription === '') {
-      this.newWebsiteDescription = this.website.description;
-    }
-    this.newWebsite = {_id: this.websiteId, name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
-    this.websiteService.updateWebsite(this.websiteId, this.newWebsite);
+    this.websiteService.updateWebsite(this.websiteId, this.website);
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 

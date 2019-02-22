@@ -41,7 +41,6 @@
       </div>
     </div>
     <div class="col-sm-7">
-      <!--<form #f="ngForm" (ngSubmit)="onEditSubmit()">-->
       <form>
         <div class="form-group">
           <label for="websiteName">Website Name</label>
@@ -51,14 +50,7 @@
             class="form-control"
             id="websiteName"
             placeholder="{{ website.name }}"
-            [(ngModel)]="newWebsiteName">
-            <!--required-->
-            <!--#name="ngModel">-->
-          <!--<span-->
-            <!--class="help-block"-->
-            <!--*ngIf="!name.valid && name.touched">-->
-            <!--Please enter a valid website name-->
-          <!--</span>-->
+            [(ngModel)]="website.name">
         </div>
         <div class="form-group">
           <label for="websiteDescription">Website Description</label>
@@ -67,15 +59,9 @@
             name="websiteDescription"
             class="form-control"
             rows="5"
-            [(ngModel)]="newWebsiteDescription"
+            [(ngModel)]="website.description"
             placeholder="{{ website.description }}"></textarea>
         </div>
-        <!--<button-->
-          <!--class="btn btn-primary btn-block"-->
-          <!--type="submit">-->
-          <!--[disabled]="!f.valid">-->
-          <!--Submit-->
-        <!--</button>-->
         <button class="btn btn-danger btn-block" type="button" (click)="onDelete()">Delete</button>
       </form>
     </div>

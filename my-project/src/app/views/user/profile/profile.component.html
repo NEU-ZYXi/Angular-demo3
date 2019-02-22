@@ -20,7 +20,7 @@
         type="text"
         class="form-control"
         placeholder="{{ user.username }}"
-        [(ngModel)]="newUsername">
+        [(ngModel)]="user.username">
     </div>
     <div class="form-group">
       <label>Email</label>
@@ -29,7 +29,7 @@
         type="email"
         class="form-control"
         placeholder="{{ user.email }}"
-        [(ngModel)]="newEmail">
+        [(ngModel)]="user.email">
     </div>
     <div class="form-group">
       <label>First Name</label>
@@ -38,7 +38,7 @@
         type="text"
         class="form-control"
         placeholder="{{ user.firstName }}"
-        [(ngModel)]="newFirstName">
+        [(ngModel)]="user.firstName">
     </div>
     <div class="form-group">
       <label>Last Name</label>
@@ -47,7 +47,7 @@
         type="text"
         class="form-control"
         placeholder="{{ user.lastName }}"
-        [(ngModel)]="newLastName">
+        [(ngModel)]="user.lastName">
     </div>
   </form>
   <a class="btn btn-primary btn-block" routerLink="./website">Websites</a>

@@ -27,7 +27,7 @@ export class PageService {
     return ans;
   }
 
-  findPageNyId(pageId: string) {
+  findPageById(pageId: string) {
     for (let page of this.pages) {
       if (page._id === pageId) {
         return page;
