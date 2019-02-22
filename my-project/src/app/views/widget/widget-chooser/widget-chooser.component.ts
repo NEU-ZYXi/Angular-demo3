@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {WidgetService} from '../../../services/widget.service.client';
 
 @Component({
@@ -8,11 +8,13 @@ import {WidgetService} from '../../../services/widget.service.client';
   templateUrl: './widget-chooser.component.html',
   styleUrls: ['./widget-chooser.component.css']
 })
-export class WidgetChooserComponent implements OnInit {
+export class WidgetChooserComponent implements OnInit, OnDestroy {
 
   userId: string;
   widgetId: string;
   widgetType: string;
+  widgetTypes: string[];
+  subscription: Subscription;
 
   constructor(private widgetService: WidgetService, private route: ActivatedRoute) { }
 
@@ -24,7 +26,8 @@ export class WidgetChooserComponent implements OnInit {
           this.widgetId = params['wgid'];
         }
       );
-    this.widgetService.currentWidgetType
+    this.widgetTypes = this.widgetService.widgetTypes;
+    this.subscription = this.widgetService.currentWidgetType
       .subscribe(
         (widgetType: string) => {
           this.widgetType = widgetType;
@@ -34,6 +37,10 @@ export class WidgetChooserComponent implements OnInit {
 
   onNewWidget(widgetType: string) {
     this.widgetService.chooseNewType(widgetType);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -19,6 +19,7 @@ export class WidgetYoutubeComponent implements OnInit {
   newWidgetText: string = '';
   newWidgetWidth: string = '';
   newWidgetURL: string = '';
+  editFlag = false;
 
   constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) { }
 
@@ -34,6 +35,7 @@ export class WidgetYoutubeComponent implements OnInit {
     if (this.widgetId !== 'undefined') {
       this.widget = this.widgetService.findWidgetById(this.widgetId);
     }
+    this.editFlag = this.widgetService.editFlag;
   }
 
 

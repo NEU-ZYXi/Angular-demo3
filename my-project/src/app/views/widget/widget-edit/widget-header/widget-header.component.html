@@ -44,7 +44,7 @@
         placeholder="{{ widget.size }}"
         [(ngModel)]="newWidgetSize">
     </div>
-    <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
+    <button *ngIf="editFlag" class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
   </form>
 </div>
 

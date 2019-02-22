@@ -18,6 +18,7 @@ export class WidgetHeaderComponent implements OnInit {
   newWidgetName: string;
   newWidgetText: string = '';
   newWidgetSize: number = null;
+  editFlag = false;
 
   constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) { }
 
@@ -33,6 +34,7 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.widgetId !== 'undefined') {
       this.widget = this.widgetService.findWidgetById(this.widgetId);
     }
+    this.editFlag = this.widgetService.editFlag;
   }
 
   onEditWidget() {

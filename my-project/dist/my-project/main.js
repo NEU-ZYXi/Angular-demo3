@@ -626,6 +626,10 @@ var WidgetService = /** @class */ (function () {
             new _models_widget_model__WEBPACK_IMPORTED_MODULE_1__["WidgetYoutube"]("678", "YOUTUBE", "321", "100%", "https://www.youtube.com//embed/eSLe4HuKuK0"),
             new _models_widget_model__WEBPACK_IMPORTED_MODULE_1__["WidgetHtml"]("789", "HTML", "321", "<p>Lorem ipsum</p>")
         ];
+        this.widgetTypes = [
+            "Header", "Label", "HTML", "Text Input", "Link", "Button", "Image", "YouTube", "Data Table", "Repeater"
+        ];
+        this.editFlag = false;
     }
     WidgetService.prototype.createWidget = function (pageId, widget) {
         widget._id = String(Math.floor(Math.random() * 1000) + 1);
@@ -1182,7 +1186,7 @@ var RegisterComponent = /** @class */ (function () {
         this.router.navigate(['/user', loginUser._id]);
     };
     RegisterComponent.prototype.onCancel = function () {
-        this.signupForm.reset();
+        this.router.navigate(['login']);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('form'),
@@ -1483,7 +1487,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Choose Widget\n      </a>\n    </div>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <ul class=\"list-group\">\n    <li class=\"list-group-item border-0\">\n      <a [routerLink]=\"['../', widgetId]\" class=\"text-blue\" (click)=\"onNewWidget('HEADING')\">Header</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Label</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">HTML</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Text Input</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Link</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Button</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a [routerLink]=\"['../', widgetId]\" class=\"text-blue\" (click)=\"onNewWidget('IMAGE')\">Image</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a [routerLink]=\"['../', widgetId]\" class=\"text-blue\" (click)=\"onNewWidget('YOUTUBE')\">YouTube</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Date Table</a>\n    </li>\n    <li class=\"list-group-item border-0\">\n      <a routerLink=\"./\" class=\"text-blue\">Repeater</a>\n    </li>\n  </ul>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Choose Widget\n      </a>\n    </div>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <ul class=\"list-group\" *ngFor=\"let type of widgetTypes\">\n    <li class=\"list-group-item border-0\">\n      <a [routerLink]=\"['../', widgetId]\" class=\"text-blue\" (click)=\"onNewWidget(type)\">{{ type }}</a>\n    </li>\n  </ul>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1517,13 +1521,17 @@ var WidgetChooserComponent = /** @class */ (function () {
             _this.userId = params['uid'];
             _this.widgetId = params['wgid'];
         });
-        this.widgetService.currentWidgetType
+        this.widgetTypes = this.widgetService.widgetTypes;
+        this.subscription = this.widgetService.currentWidgetType
             .subscribe(function (widgetType) {
             _this.widgetType = widgetType;
         });
     };
     WidgetChooserComponent.prototype.onNewWidget = function (widgetType) {
         this.widgetService.chooseNewType(widgetType);
+    };
+    WidgetChooserComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
     WidgetChooserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1558,7 +1566,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"widget !== undefined\" [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n</div>\n\n<div *ngIf=\"widget === undefined\" [ngSwitch]=\"widgetChosen\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"widget !== undefined\" [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../\">Back</button>\n  </div>\n</div>\n\n<div *ngIf=\"widget === undefined\" [ngSwitch]=\"widgetChosen\">\n  <div *ngSwitchCase=\"'Header'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'Image'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YouTube'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../new\">Back</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1592,14 +1600,21 @@ var WidgetEditComponent = /** @class */ (function () {
             _this.userId = params['uid'];
             _this.widgetId = params['wgid'];
         });
-        this.widgetService.currentWidgetType
+        this.subscription = this.widgetService.currentWidgetType
             .subscribe(function (widgetChosen) {
             _this.widgetChosen = widgetChosen;
         });
         // console.log(this.widgetId);
         if (this.widgetId !== 'undefined') {
             this.widget = this.widgetService.findWidgetById(this.widgetId);
+            this.widgetService.editFlag = true;
         }
+        else {
+            this.widgetService.editFlag = false;
+        }
+    };
+    WidgetEditComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
     WidgetEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1634,7 +1649,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>Size</label>\n      <input\n        type=\"number\"\n        class=\"form-control\"\n        name=\"widgetSize\"\n        placeholder=\"{{ widget.size }}\"\n        [(ngModel)]=\"newWidgetSize\">\n    </div>\n    <button class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>Size</label>\n      <input\n        type=\"number\"\n        class=\"form-control\"\n        name=\"widgetSize\"\n        placeholder=\"{{ widget.size }}\"\n        [(ngModel)]=\"newWidgetSize\">\n    </div>\n    <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1666,6 +1681,7 @@ var WidgetHeaderComponent = /** @class */ (function () {
         this.widget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]("", "", "", null, "");
         this.newWidgetText = '';
         this.newWidgetSize = null;
+        this.editFlag = false;
     }
     WidgetHeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1678,6 +1694,7 @@ var WidgetHeaderComponent = /** @class */ (function () {
         if (this.widgetId !== 'undefined') {
             this.widget = this.widgetService.findWidgetById(this.widgetId);
         }
+        this.editFlag = this.widgetService.editFlag;
     };
     WidgetHeaderComponent.prototype.onEditWidget = function () {
         if (this.widgetId === 'undefined') {
@@ -1737,7 +1754,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n    <div class=\"form-group\">\n      <label>Upload</label>\n      <div class=\"file-upload\">\n        <input type=\"file\"\n               id=\"avatar\" name=\"avatar\"\n               accept=\"image/png, image/jpeg\">\n      </div>\n    </div>\n    <button class=\"btn btn-primary btn-block\">Upload Image</button>\n    <button class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n    <div class=\"form-group\">\n      <label>Upload</label>\n      <div class=\"file-upload\">\n        <input type=\"file\"\n               id=\"avatar\" name=\"avatar\"\n               accept=\"image/png, image/jpeg\">\n      </div>\n    </div>\n    <button class=\"btn btn-primary btn-block\">Upload Image</button>\n    <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1770,6 +1787,7 @@ var WidgetImageComponent = /** @class */ (function () {
         this.newWidgetText = '';
         this.newWidgetWidth = '';
         this.newWidgetURL = '';
+        this.editFlag = false;
     }
     WidgetImageComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1782,6 +1800,7 @@ var WidgetImageComponent = /** @class */ (function () {
         if (this.widgetId !== 'undefined') {
             this.widget = this.widgetService.findWidgetById(this.widgetId);
         }
+        this.editFlag = this.widgetService.editFlag;
     };
     WidgetImageComponent.prototype.onEditWidget = function () {
         if (this.widgetId === 'undefined') {
@@ -1844,7 +1863,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n    <button class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n    <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1877,6 +1896,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         this.newWidgetText = '';
         this.newWidgetWidth = '';
         this.newWidgetURL = '';
+        this.editFlag = false;
     }
     WidgetYoutubeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1889,6 +1909,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         if (this.widgetId !== 'undefined') {
             this.widget = this.widgetService.findWidgetById(this.widgetId);
         }
+        this.editFlag = this.widgetService.editFlag;
     };
     WidgetYoutubeComponent.prototype.onEditWidget = function () {
         if (this.widgetId === 'undefined') {
@@ -1951,7 +1972,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widgets\n      </a>\n    </div>\n    <a routerLink=\"new\" class=\"text-black\">\n      <i class=\"fas fa-plus\"></i>\n    </a>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <div *ngFor=\"let widget of widgets\" [ngSwitch]=\"widget.widgetType\">\n    <a routerLink=\"./\" class=\"float-right text-black\">\n      <i class=\"fas fa-bars\"></i>\n    </a>\n    <a routerLink=\"{{ widget._id }}\" class=\"float-right text-blue\">\n      <i class=\"fas fa-cog\"></i>\n    </a>\n    <h1 *ngSwitchCase=\"'HEADING'\">{{ widget.text }}</h1>\n    <img *ngSwitchCase=\"'IMAGE'\" src=\"{{ widget.url }}\" alt=\"\">\n    <iframe *ngSwitchCase=\"'YOUTUBE'\" width=\"420\" height=\"315\" [src]=\"widget.url | safe\"></iframe>\n    <!--<object *ngSwitchCase=\"'HTML'\" data=\"html/{{ widget.text }}\"></object>-->\n    <p *ngSwitchDefault><br><br></p>\n  </div>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"\">\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-play\"></i>\n      </a>\n      &nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-eye\"></i>\n      </a>\n    </div>\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widgets\n      </a>\n    </div>\n    <a routerLink=\"new\" class=\"text-black\">\n      <i class=\"fas fa-plus\"></i>\n    </a>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <div *ngFor=\"let widget of widgets\" [ngSwitch]=\"widget.widgetType\">\n    <a routerLink=\"./\" class=\"float-right text-black\">\n      <i class=\"fas fa-bars\"></i>\n    </a>\n    <a routerLink=\"{{ widget._id }}\" class=\"float-right text-blue\">\n      <i class=\"fas fa-cog\"></i>\n    </a>\n    <div *ngSwitchCase=\"'HEADING'\" [ngSwitch]=\"widget.size\">\n      <h1 *ngSwitchCase=\"1\">{{ widget.text }}</h1>\n      <h2 *ngSwitchCase=\"2\">{{ widget.text }}</h2>\n      <h3 *ngSwitchCase=\"3\">{{ widget.text }}</h3>\n      <h4 *ngSwitchCase=\"4\">{{ widget.text }}</h4>\n      <h5 *ngSwitchCase=\"5\">{{ widget.text }}</h5>\n      <h3 *ngSwitchDefault>{{ widget.text }}</h3>\n    </div>\n    <img *ngSwitchCase=\"'IMAGE'\" src=\"{{ widget.url }}\" alt=\"\">\n    <iframe *ngSwitchCase=\"'YOUTUBE'\" width=\"420\" height=\"315\" [src]=\"widget.url | safe\"></iframe>\n    <div *ngSwitchCase=\"'HTML'\" [innerHTML]=\"widget.text\"></div>\n    <p *ngSwitchDefault><br><br></p>\n  </div>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"\">\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-play\"></i>\n      </a>\n      &nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-eye\"></i>\n      </a>\n    </div>\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -2063,7 +2084,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/stevenxi/Documents/CS5610/my-project/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/stevenxi/Documents/webdev/my-project/src/main.ts */"./src/main.ts");
 
 
 /***/ })

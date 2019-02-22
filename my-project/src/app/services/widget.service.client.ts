@@ -19,6 +19,11 @@ export class WidgetService {
     new WidgetYoutube("678", "YOUTUBE", "321", "100%", "https://www.youtube.com//embed/eSLe4HuKuK0"),
     new WidgetHtml("789", "HTML", "321", "<p>Lorem ipsum</p>")
   ];
+  widgetTypes: string[] = [
+    "Header", "Label", "HTML", "Text Input", "Link", "Button", "Image", "YouTube", "Data Table", "Repeater"
+  ];
+  editFlag = false;
+
 
   createWidget(pageId: string, widget: Widget) {
     widget._id = String(Math.floor(Math.random() * 1000) + 1);

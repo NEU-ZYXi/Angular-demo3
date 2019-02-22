@@ -13,36 +13,9 @@
 </nav>
 
 <div class="container">
-  <ul class="list-group">
+  <ul class="list-group" *ngFor="let type of widgetTypes">
     <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('HEADING')">Header</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Label</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">HTML</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Text Input</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Link</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Button</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('IMAGE')">Image</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('YOUTUBE')">YouTube</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Date Table</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a routerLink="./" class="text-blue">Repeater</a>
+      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget(type)">{{ type }}</a>
     </li>
   </ul>
 </div>

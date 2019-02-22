@@ -31,6 +31,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onCancel() {
-    this.signupForm.reset();
+    this.router.navigate(['login']);
   }
 }

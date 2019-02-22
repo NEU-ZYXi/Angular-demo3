@@ -24,10 +24,17 @@
     <a routerLink="{{ widget._id }}" class="float-right text-blue">
       <i class="fas fa-cog"></i>
     </a>
-    <h1 *ngSwitchCase="'HEADING'">{{ widget.text }}</h1>
+    <div *ngSwitchCase="'HEADING'" [ngSwitch]="widget.size">
+      <h1 *ngSwitchCase="1">{{ widget.text }}</h1>
+      <h2 *ngSwitchCase="2">{{ widget.text }}</h2>
+      <h3 *ngSwitchCase="3">{{ widget.text }}</h3>
+      <h4 *ngSwitchCase="4">{{ widget.text }}</h4>
+      <h5 *ngSwitchCase="5">{{ widget.text }}</h5>
+      <h3 *ngSwitchDefault>{{ widget.text }}</h3>
+    </div>
     <img *ngSwitchCase="'IMAGE'" src="{{ widget.url }}" alt="">
     <iframe *ngSwitchCase="'YOUTUBE'" width="420" height="315" [src]="widget.url | safe"></iframe>
-    <!--<object *ngSwitchCase="'HTML'" data="html/{{ widget.text }}"></object>-->
+    <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
     <p *ngSwitchDefault><br><br></p>
   </div>
 </div>
