@@ -11,7 +11,7 @@ module.exports = app => {
   ];
   var url = '';
   var multer = require('multer');
-  var upload = multer({dest: __dirname+'/../../src/assets/uploads'});
+  var upload = multer({dest: __dirname+'/../../dist/my-project/assets/uploads'});
 
   app.post("/api/page/:pid/widget", createWidget);
   app.get("/api/page/:pid/widget", findAllWidgersForPage);
