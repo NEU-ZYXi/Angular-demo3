@@ -14,7 +14,7 @@ export class WebsiteEditComponent implements OnInit {
 
   userId: string;
   websiteId: string;
-  website: Website;
+  website: Website = {_id: "", name: "", developerId: "", description: ""};
   websites: Website[];
   websiteIdObs = new Subject<string>();
   @ViewChild('f') websiteForm: NgForm;
@@ -29,13 +29,30 @@ export class WebsiteEditComponent implements OnInit {
           this.websiteId = params['wid'];
         }
       );
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (websites: Website[]) => {
+          this.websites = websites;
+        }
+      );
+    this.websiteService.findWebsiteById(this.websiteId)
+      .subscribe(
+        (website: Website) => {
+          this.website = website;
+        }
+      );
+
+    // dynamically change the current website info of website-edit inside website-edit page
     this.websiteIdObs
       .subscribe(
         (websiteId: string) => {
           this.websiteId = websiteId;
-          this.website = this.websiteService.findWebsiteById(this.websiteId);
+          this.websiteService.findWebsiteById(this.websiteId)
+            .subscribe(
+              (website: Website) => {
+                this.website = website;
+              }
+            );
         }
     );
   }
@@ -45,13 +62,23 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   onEditWebsite() {
-    this.websiteService.updateWebsite(this.websiteId, this.website);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.websiteService.updateWebsite(this.websiteId, this.website)
+      .subscribe(
+        (website: Website) => {
+          this.website = website;
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
+      );
   }
 
   onDelete() {
-    this.websiteService.deleteWebsite(this.websiteId);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.websiteService.deleteWebsite(this.websiteId)
+      .subscribe(
+        (websites: Website[]) => {
+          this.websites = websites;
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
+      );
   }
 
 }

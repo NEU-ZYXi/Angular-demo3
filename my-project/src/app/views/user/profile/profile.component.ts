@@ -12,7 +12,9 @@ export class ProfileComponent implements OnInit {
 
   userId: string;
   username: string;
-  user: User;
+
+  // object needs to be initialized to avoid undefined on ngOnInit()
+  user: User = {_id: "", username: "", password: "", firstName: "", lastName: ""};
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
 
@@ -23,15 +25,25 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.userId = params['uid'];
+          return this.userService.findUserById(this.userId)
+            .subscribe(
+              (user: User) => {
+                this.user = user;
+                this.username = this.user['username'];
+              }
+            );
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
   }
 
   onUpdateUser() {
-    this.userService.updateUser(this.userId, this.user);
-    alert("successfully update your profile");
+    this.userService.updateUser(this.userId, this.user)
+      .subscribe(
+        (user: User) => {
+          this.user = user;
+          alert("Successfully update your profile");
+        }
+      );
   }
 
 }

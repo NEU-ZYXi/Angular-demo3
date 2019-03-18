@@ -9,11 +9,10 @@ import {Subscription} from 'rxjs';
   templateUrl: './website-list.component.html',
   styleUrls: ['./website-list.component.css']
 })
-export class WebsiteListComponent implements OnInit, OnDestroy {
+export class WebsiteListComponent implements OnInit {
 
   userId: string;
   websites: Website[];
-  subscription: Subscription;
 
   constructor(private websiteService: WebsiteService, private route: ActivatedRoute) { }
 
@@ -24,17 +23,12 @@ export class WebsiteListComponent implements OnInit, OnDestroy {
           this.userId = params['uid'];
         }
       );
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-    this.subscription = this.websiteService.websitesChanged
+    this.websiteService.findWebsitesByUser(this.userId)
       .subscribe(
         (websites: Website[]) => {
           this.websites = websites;
         }
       );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
 }

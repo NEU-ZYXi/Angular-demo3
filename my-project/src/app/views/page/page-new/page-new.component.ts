@@ -36,8 +36,12 @@ export class PageNewComponent implements OnInit {
       return false;
     } else {
       this.newPage = {_id: '', name: this.newPageName, websiteId: this.websiteId, description: ''};
-      this.pageService.createPage(this.websiteId, this.newPage);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.pageService.createPage(this.websiteId, this.newPage)
+        .subscribe(
+          (pages: Page[]) => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        );
     }
   }
 

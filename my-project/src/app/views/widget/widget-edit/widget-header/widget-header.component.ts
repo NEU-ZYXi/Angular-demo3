@@ -32,7 +32,12 @@ export class WidgetHeaderComponent implements OnInit {
         }
       );
     if (this.widgetId !== 'undefined') {
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe(
+          (widget: Widget) => {
+            this.widget = widget;
+          }
+        );
     }
     this.editFlag = this.widgetService.editFlag;
   }
@@ -40,8 +45,12 @@ export class WidgetHeaderComponent implements OnInit {
   onEditWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetHeading("", "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
-      this.widgetService.createWidget(this.pageId, this.newWidget);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.widgetService.createWidget(this.pageId, this.newWidget)
+        .subscribe(
+          (widgets: Widget[]) => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        );
     } else {
       if (this.newWidgetText === '') {
         // @ts-ignore
@@ -53,13 +62,21 @@ export class WidgetHeaderComponent implements OnInit {
       }
       // console.log(this.newWidgetText);
       this.newWidget = new WidgetHeading(this.widgetId, "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
-      this.widgetService.updateWidget(this.widgetId, this.newWidget);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.widgetService.updateWidget(this.widgetId, this.newWidget)
+        .subscribe(
+          (widget: Widget) => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        );
     }
   }
 
   onDelete() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe(
+        (widgets: Widget[]) => {
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
+      );
   }
 }

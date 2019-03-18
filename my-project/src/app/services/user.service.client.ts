@@ -1,65 +1,62 @@
 import {User} from '../models/user.model';
-import {Subject} from 'rxjs';
 
+import {Http, Response} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import 'rxjs-compat/add/operator/map';
+import {environment} from '../../environments/environment';
 
+// @Injectable() cannot be missed since here we have http in constructor
+@Injectable()
 export class UserService {
 
-  userChanged = new Subject<User[]>();
-  users: User[] = [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jannunzi", lastName: "Annunzi"},
-  ];
+  baseUrl = environment.baseUrl;
+
+  constructor(private http: Http) {}
+
+  // all functions return an observable, .subscribe whenever used
 
   createUser(user: User) {
     user._id = String(Math.floor(Math.random() * 1000) + 1);
-    this.users.push(user);
-    this.userChanged.next(this.users.slice());
+    return this.http.post(this.baseUrl + '/api/user', user)
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 
   findUserById(userId: string) {
-    for (let user of this.users) {
-      if (user._id === userId) {
-        return user;
-      }
-    }
+    return this.http.get(this.baseUrl + '/api/user/' + userId)
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 
   findUserByUsername(username: string) {
-    for (let user of this.users) {
-      if (user.username === username) {
-        return user;
-      }
-    }
+    return this.http.get(this.baseUrl + '/api/user?username=' + username)
+      .map((res: Response) => {
+        return res.text() ? res.json() : undefined;
+      })
   }
 
   findUserByCredentials(username: string, password: string) {
-    for (let user of this.users) {
-      if (user.username === username && user.password === password) {
-        return user;
-      }
-    }
+    return this.http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password)
+      .map((res: Response) => {
+        // important to check if response is empty since .json() cannot be called on empty
+        return res.text() ? res.json() : undefined;
+      });
   }
 
   updateUser(userId: string, newUser: User) {
-    for (let user of this.users) {
-      if (user._id === userId) {
-        user.username = newUser.username;
-        user.password = newUser.password;
-        user.firstName = newUser.firstName;
-        user.lastName = newUser.lastName;
-      }
-    }
-    this.userChanged.next(this.users.slice());
+    return this.http.put(this.baseUrl + '/api/user/' + userId, newUser)
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 
   deleteUser(userId: string) {
-    this.users.forEach((user, index) => {
-      if (user._id === userId) {
-        this.users.splice(index, 1);
-      }
-    });
-    this.userChanged.next(this.users.slice());
+    return this.http.delete(this.baseUrl + '/api/user/' + userId)
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 }

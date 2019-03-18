@@ -33,7 +33,12 @@ export class WidgetYoutubeComponent implements OnInit {
         }
       );
     if (this.widgetId !== 'undefined') {
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe(
+          (widget: Widget) => {
+            this.widget = widget;
+          }
+        );
     }
     this.editFlag = this.widgetService.editFlag;
   }
@@ -42,8 +47,12 @@ export class WidgetYoutubeComponent implements OnInit {
   onEditWidget() {
     if (this.widgetId === 'undefined') {
       this.newWidget = new WidgetYoutube("", "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
-      this.widgetService.createWidget(this.pageId, this.newWidget);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.widgetService.createWidget(this.pageId, this.newWidget)
+        .subscribe(
+          (widgets: Widget[]) => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        );
     } else {
       if (this.newWidgetText === '') {
         // @ts-ignore
@@ -58,14 +67,22 @@ export class WidgetYoutubeComponent implements OnInit {
         this.newWidgetURL = this.widget.url;
       }
       this.newWidget = new WidgetYoutube(this.widgetId, "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
-      this.widgetService.updateWidget(this.widgetId, this.newWidget);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.widgetService.updateWidget(this.widgetId, this.newWidget)
+        .subscribe(
+          (widget: Widget) => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        );
     }
   }
 
   onDelete() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe(
+        (widgets: Widget[]) => {
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
+      );
   }
 
 }

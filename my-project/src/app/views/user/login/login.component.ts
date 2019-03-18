@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('form') loginForm: NgForm;
   errorFlag: boolean = false;
   errorMessage: string = "Invalid username or password";
+  loginUser: User;
 
   constructor(private router: Router, private userService: UserService, private route: ActivatedRoute) { }
 
@@ -25,14 +27,19 @@ export class LoginComponent implements OnInit {
   onLogin() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    const submittedUser = this.userService.findUserByUsername(this.username);
-
-    if (submittedUser === undefined || this.password != submittedUser.password) {
-      this.errorFlag = true;
-    } else {
-      const loginUser = this.userService.findUserByCredentials(this.username, this.password);
-      this.router.navigate(['/user', loginUser._id]);
-    }
+    // can also use findUserByUsername and check if password matches
+    this.userService.findUserByCredentials(this.username, this.password)
+      .subscribe(
+        (user: User) => {
+          this.loginUser = user;
+          // in user.service, if response is empty, return undefined
+          if (this.loginUser === undefined) {
+            this.errorFlag = true;
+          } else {
+            this.router.navigate(['/user', this.loginUser._id]);
+          }
+        }
+      );
   }
 
   reload() {

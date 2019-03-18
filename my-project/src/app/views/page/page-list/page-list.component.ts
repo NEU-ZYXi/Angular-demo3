@@ -9,12 +9,11 @@ import {Subscription} from 'rxjs';
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.css']
 })
-export class PageListComponent implements OnInit, OnDestroy {
+export class PageListComponent implements OnInit {
 
   userId: string;
   websiteId: string;
   pages: Page[];
-  subscription: Subscription;
 
   constructor(private pageService: PageService, private route: ActivatedRoute) {}
 
@@ -26,17 +25,12 @@ export class PageListComponent implements OnInit, OnDestroy {
           this.websiteId = params['wid'];
         }
       );
-    this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
-    this.subscription = this.pageService.pagesChanged
+    this.pageService.findPageByWebsiteId(this.websiteId)
       .subscribe(
         (pages: Page[]) => {
           this.pages = pages;
         }
       );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
 }

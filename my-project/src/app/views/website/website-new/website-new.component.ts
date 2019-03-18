@@ -27,12 +27,22 @@ export class WebsiteNewComponent implements OnInit {
           this.userId = params['uid'];
         }
       );
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (websites: Website[]) => {
+          this.websites = websites;
+        }
+      );
   }
 
   onSubmit() {
     this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
-    this.websiteService.createWebsite(this.userId, this.newWebsite);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.websiteService.createWebsite(this.userId, this.newWebsite)
+      .subscribe(
+        (websites: Website[]) => {
+          this.websites = websites;
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
+      );
   }
 }

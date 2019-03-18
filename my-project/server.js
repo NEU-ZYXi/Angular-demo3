@@ -1,3 +1,5 @@
+// Build project using 'ng build --watch' and Run server using 'nodemon server.js' for immediately update of codes
+
 // Get the dependencies
 
 const express = require('express');
@@ -20,12 +22,14 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
 const port = process.env.PORT || '3200';
 app.set('port', port);
 
+require('./server/app')(app);
 
 // Create HTTP server
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
 
-//require('./assignment/app')(app);

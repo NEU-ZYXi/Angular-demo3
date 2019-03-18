@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   regPassword: string;
   regVerifiedPassword: string;
   user: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
+  loginUser: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -25,9 +26,13 @@ export class RegisterComponent implements OnInit {
   onRegister() {
     this.user.username = this.regUsername;
     this.user.password = this.regPassword;
-    this.userService.createUser(this.user);
-    const loginUser = this.userService.findUserByCredentials(this.regUsername, this.regPassword);
-    this.router.navigate(['/user', loginUser._id])
+    this.userService.createUser(this.user)
+      .subscribe(
+        (user: User) => {
+          this.loginUser = user;
+          this.router.navigate(['/user', this.loginUser._id])
+        }
+      );
   }
 
   onCancel() {

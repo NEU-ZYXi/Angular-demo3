@@ -35,7 +35,12 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       );
     // console.log(this.widgetId);
     if (this.widgetId !== 'undefined') {
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe(
+          (widget: Widget) => {
+            this.widget = widget;
+          }
+        );
       this.widgetService.editFlag = true;
     } else {
       this.widgetService.editFlag = false;
