@@ -73,9 +73,11 @@ module.exports = app => {
           if (widgets[i].widgetType === 'HEADING') {
             widgets[i].size = widget.size;
             widgets[i].text = widget.text;
+            widgets[i].name = widget.name;
           } else if (widgets[i].widgetType === 'IMAGE') {
             widgets[i].width = widget.width;
             widgets[i].url = widget.url;
+            widgets[i].name = widget.name;
             if (url !== '') {
               widget[i].url = url;
               url = '';
@@ -83,6 +85,7 @@ module.exports = app => {
           } else if (widgets[i].widgetType === 'YOUTUBE') {
             widgets[i].width = widget.width;
             widgets[i].url = widget.url;
+            widgets[i].name = widget.name;
           }
         res.status(200).send(widget);
         return;

@@ -35,7 +35,7 @@ export class PageNewComponent implements OnInit {
     if (this.newPageName === '') {
       return false;
     } else {
-      this.newPage = {_id: '', name: this.newPageName, websiteId: this.websiteId, description: ''};
+      this.newPage = {_id: '', name: this.newPageName, websiteId: this.websiteId, description: this.newPageTitle};
       this.pageService.createPage(this.websiteId, this.newPage)
         .subscribe(
           (pages: Page[]) => {

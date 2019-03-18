@@ -14,7 +14,7 @@ export class WidgetImageComponent implements OnInit {
   userId: string;
   pageId: string;
   websiteId: string;
-  widget: Widget = new WidgetImage("", "", "", "", "");
+  widget: Widget = new WidgetImage("", "", "", "", "", "");
   newWidget: Widget;
   newWidgetName: string;
   newWidgetText: string = '';
@@ -49,7 +49,7 @@ export class WidgetImageComponent implements OnInit {
 
   onEditWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetImage("", "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+      this.newWidget = new WidgetImage("", "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL, this.newWidgetName);
       this.widgetService.createWidget(this.pageId, this.newWidget)
         .subscribe(
           (widgets: Widget[]) => {
@@ -69,7 +69,7 @@ export class WidgetImageComponent implements OnInit {
         // @ts-ignore
         this.newWidgetURL = this.widget.url;
       }
-      this.newWidget = new WidgetImage(this.widgetId, "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+      this.newWidget = new WidgetImage(this.widgetId, "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL, this.newWidgetName);
       this.widgetService.updateWidget(this.widgetId, this.newWidget)
         .subscribe(
           (widget: Widget) => {

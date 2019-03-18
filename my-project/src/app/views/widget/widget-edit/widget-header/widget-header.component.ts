@@ -13,7 +13,7 @@ export class WidgetHeaderComponent implements OnInit {
   widgetId: string;
   userId: string;
   pageId: string;
-  widget: Widget = new WidgetHeading("", "", "", null, "");
+  widget: Widget = new WidgetHeading("", "", "", null, "", "");
   newWidget: Widget;
   newWidgetName: string;
   newWidgetText: string = '';
@@ -44,7 +44,7 @@ export class WidgetHeaderComponent implements OnInit {
 
   onEditWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetHeading("", "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
+      this.newWidget = new WidgetHeading("", "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText, this.newWidgetName);
       this.widgetService.createWidget(this.pageId, this.newWidget)
         .subscribe(
           (widgets: Widget[]) => {
@@ -61,7 +61,7 @@ export class WidgetHeaderComponent implements OnInit {
         this.newWidgetSize = this.widget.size;
       }
       // console.log(this.newWidgetText);
-      this.newWidget = new WidgetHeading(this.widgetId, "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
+      this.newWidget = new WidgetHeading(this.widgetId, "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText, this.newWidgetName);
       this.widgetService.updateWidget(this.widgetId, this.newWidget)
         .subscribe(
           (widget: Widget) => {
