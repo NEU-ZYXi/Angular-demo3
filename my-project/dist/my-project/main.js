@@ -2404,7 +2404,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3200'
+    // baseUrl: 'http://localhost:3200'
+    baseUrl: 'https://webdev-cs5610-zhenyuan.herokuapp.com/'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -2451,7 +2452,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/stevenxi/Documents/webdev/my-project/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/stevenxi/Documents/CS5610/my-project/src/main.ts */"./src/main.ts");
 
 
 /***/ })
