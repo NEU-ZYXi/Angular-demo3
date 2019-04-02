@@ -1,5 +1,7 @@
 module.exports = app => {
 
+  var websiteModel = require('../models/website/website.model.server');
+
   var websites = [
     {_id: "123", name: "Facebook", developerId: "456", description: "Lorem"},
     {_id: "234", name: "Tweeter", developerId: "456", description: "Lorem"},
@@ -16,60 +18,58 @@ module.exports = app => {
   app.put("/api/website/:wid", updateWebsite);
   app.delete("/api/website/:wid", deleteWebsite);
 
-  function findWebsitesByUserId(userId) {
-    var ans = [];
-    for (var i = 0; i < websites.length; ++i) {
-      if (websites[i].developerId === userId) {
-        ans.push(websites[i]);
-      }
-    }
-    return ans;
-  }
-
   function createWebsite(req, res) {
     const uid = req.params['uid'];
     var website = req.body;
-    websites.push(website);
-    var ans = findWebsitesByUserId(uid);
-    res.json(ans);
+    websiteModel.createWebsite(uid, website)
+      .then((websites) => {
+        res.json(websites);
+      }, (error) => {
+        if (error) {
+          res.status(400).send(error);
+        }
+      });
   }
 
   function findAllWebsitesForUser(req, res) {
     const uid = req.params['uid'];
-    var websites = findWebsitesByUserId(uid);
-    res.json(websites);
+    websiteModel.findAllWebsitesForUser(uid)
+      .then((websites) => {
+        res.json(websites);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
   function findWebsiteById(req, res) {
     const wid = req.params['wid'];
-    var website = websites.find((website) => {
-      return website._id === wid;
-    });
-    res.json(website);
+    websiteModel.findWebsiteById(wid)
+      .then((website) => {
+        res.json(website);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
   function updateWebsite(req, res) {
     const wid = req.params["wid"];
     var website = req.body;
-    for (var i = 0; i < websites.length; ++i) {
-      if (websites[i]._id === wid) {
-        websites[i].name = website.name;
-        websites[i].description = website.description;
-        res.status(200).send(website);
-        return;
-      }
-    }
-    res.status(404).send("Website Not Found");
+    websiteModel.updateWebsite(wid, website)
+      .then(website => {
+        res.json(website);
+      }, error => {
+        res.status(400).send(error);
+      });
   }
 
   function deleteWebsite(req, res) {
     const wid = req.params["wid"];
-    websites.forEach((website, index) => {
-      if (website._id === wid) {
-        websites.splice(index, 1);
-      }
-    });
-    res.json(websites);
+    websiteModel.deleteWebsite(wid)
+      .then((websites) => {
+        res.json(websites);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
 };

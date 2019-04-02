@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subject, Subscription} from 'rxjs';
 import {WidgetService} from '../../../services/widget.service.client';
 
@@ -11,18 +11,21 @@ import {WidgetService} from '../../../services/widget.service.client';
 export class WidgetChooserComponent implements OnInit, OnDestroy {
 
   userId: string;
+  pageId: string;
   widgetId: string;
   widgetType: string;
   widgetTypes: string[];
+  newWidget;
   subscription: Subscription;
 
-  constructor(private widgetService: WidgetService, private route: ActivatedRoute) { }
+  constructor(private widgetService: WidgetService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
           this.userId = params['uid'];
+          this.pageId = params['pid'];
           this.widgetId = params['wgid'];
         }
       );
@@ -37,6 +40,13 @@ export class WidgetChooserComponent implements OnInit, OnDestroy {
 
   onNewWidget(widgetType: string) {
     this.widgetService.chooseNewType(widgetType);
+    this.newWidget = {name: '', text: '', widgetType: this.widgetType};
+    this.widgetService.createWidget(this.pageId, this.newWidget)
+      .subscribe(
+        (widget => {
+          this.router.navigate(['../', widget._id], {relativeTo: this.route});
+        })
+      );
   }
 
   ngOnDestroy(): void {

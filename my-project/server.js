@@ -33,3 +33,13 @@ require('./server/app')(app);
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
 
+// mongodb://<dbuser>:<dbpassword>@ds121406.mlab.com:21406/webdev
+// username: asd123, password: asd123
+var connectionString = 'mongodb://asd123:asd123@ds121406.mlab.com:21406/webdev';
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const client = mongoose.connect(connectionString, {useNewUrlParser: true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+

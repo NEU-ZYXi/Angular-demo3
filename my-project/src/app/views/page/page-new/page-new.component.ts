@@ -15,9 +15,10 @@ export class PageNewComponent implements OnInit {
 
   userId: string;
   websiteId: string;
-  newPage: Page;
+  newPage;
   newPageName: string = '';
   newPageTitle: string;
+  newPageDescription: string;
 
   constructor(private pageService: PageService, private route: ActivatedRoute, private router: Router) { }
 
@@ -35,7 +36,7 @@ export class PageNewComponent implements OnInit {
     if (this.newPageName === '') {
       return false;
     } else {
-      this.newPage = {_id: '', name: this.newPageName, websiteId: this.websiteId, description: this.newPageTitle};
+      this.newPage = { name: this.newPageName, title: this.newPageTitle, websiteId: this.websiteId, description: this.newPageDescription};
       this.pageService.createPage(this.websiteId, this.newPage)
         .subscribe(
           (pages: Page[]) => {

@@ -1,5 +1,7 @@
 module.exports = app => {
 
+  var userModel = require('../models/user/user.model.server');
+
   var users = [
     {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
     {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
@@ -19,27 +21,39 @@ module.exports = app => {
 
   function createUser(req, res) {
     var user = req.body;
-    users.push(user);
-    res.json(user);
+    userModel.createUser(user)
+      .then((user) => {
+        res.json(user);
+      }, (error) => {
+        if (error) {
+          res.status(400).send(error);
+        }
+      });
   }
 
   function findUserByUsername(req, res) {
     const username = req.query["username"];
     var user = null;
     if (username) {
-      user = users.find((user) => {
-        return user.username === username;
-      });
+      userModel.findUserByUsername(username)
+        .then((user) => {
+          res.json(user);
+        }, (error) => {
+          if (error) {
+            res.status(400).send(error);
+          }
+        });
     }
-    res.json(user);
   }
 
   function findUserById(req, res) {
     const uid = req.params['uid'];
-    var user = users.find((user) => {
-      return user._id === uid;
-    });
-    res.json(user);
+    userModel.findUserById(uid)
+      .then((user) => {
+        res.json(user);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
   function findUserByCredentials(req, res) {
@@ -47,35 +61,30 @@ module.exports = app => {
     const password = req.query["password"];
     var user = null;
     if (username && password) {
-      user = users.find((user) => {
-        return user.username === username && user.password === password;
-      });
+      userModel.findUserByCredentials(username, password)
+        .then((user) => {
+          res.json(user);
+        }, (error) => {
+          res.status(400).send(error);
+        });
     }
-    res.json(user);
   }
 
   function updateUser(req, res) {
     const uid = req.params["uid"];
     var user = req.body;
-    for (var i = 0; i < users.length; ++i) {
-      if (users[i]._id === uid) {
-        // username is not updated
-        users[i].firstName = user.firstName;
-        users[i].lastName = user.lastName;
-        res.status(200).send(user);
-        return;
-      }
-    }
-    res.status(404).send("User Not Found");
+    userModel.updateUser(uid, user)
+      .then(user => {
+        res.json(user);
+      }, error => {
+        res.status(400).send(error);
+      });
   }
 
   function deleteUser(req, res) {
     const uid = req.params["uid"];
-    users.forEach((user, index) => {
-      if (user._id === userId) {
-        users.splice(index, 1);
-      }
-    });
+    userModel.deleteUser(uid)
+      .then();
   }
 
 };

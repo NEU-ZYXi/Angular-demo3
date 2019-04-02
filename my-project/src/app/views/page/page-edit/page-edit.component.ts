@@ -13,7 +13,7 @@ export class PageEditComponent implements OnInit {
   userId: string;
   websiteId: string;
   pageId: string;
-  page: Page = {_id: "", name: "", websiteId: "", description: ""};
+  page = { name: "", title: "", websiteId: "", description: ""};
 
   constructor(private pageService: PageService, private route: ActivatedRoute, private router: Router) { }
 

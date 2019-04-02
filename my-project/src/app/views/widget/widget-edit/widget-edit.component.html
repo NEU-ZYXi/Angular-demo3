@@ -8,6 +8,12 @@
   <div *ngSwitchCase="'YOUTUBE'">
     <app-widget-youtube></app-widget-youtube>
   </div>
+  <div *ngSwitchCase="'HTML'">
+    <app-widget-html></app-widget-html>
+  </div>
+  <div *ngSwitchCase="'TEXT INPUT'">
+    <app-widget-text></app-widget-text>
+  </div>
   <div *ngSwitchDefault>
     <h1>This Widget Type is not DEFINED in assignment</h1>
     <hr>
@@ -16,14 +22,20 @@
 </div>
 
 <div *ngIf="widget === undefined" [ngSwitch]="widgetChosen">
-  <div *ngSwitchCase="'Header'">
+  <div *ngSwitchCase="'HEADING'">
     <app-widget-header></app-widget-header>
   </div>
-  <div *ngSwitchCase="'Image'">
+  <div *ngSwitchCase="'IMAGE'">
     <app-widget-image></app-widget-image>
   </div>
-  <div *ngSwitchCase="'YouTube'">
+  <div *ngSwitchCase="'YOUTUBE'">
     <app-widget-youtube></app-widget-youtube>
+  </div>
+  <div *ngSwitchCase="'HTML'">
+    <app-widget-html></app-widget-html>
+  </div>
+  <div *ngSwitchCase="'TEXT INPUT'">
+    <app-widget-text></app-widget-text>
   </div>
   <div *ngSwitchDefault>
     <h1>This Widget Type is not DEFINED in assignment</h1>

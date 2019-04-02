@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Widget, WidgetImage, WidgetYoutube} from '../../../../models/widget.model';
+import {Widget} from '../../../../models/widget.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 
@@ -13,8 +13,8 @@ export class WidgetYoutubeComponent implements OnInit {
   widgetId: string;
   userId: string;
   pageId: string;
-  widget: Widget = new WidgetYoutube("", "", "", "", "", "");
-  newWidget: Widget;
+  widget;
+  newWidget;
   newWidgetName: string;
   newWidgetText: string = '';
   newWidgetWidth: string = '';
@@ -46,7 +46,7 @@ export class WidgetYoutubeComponent implements OnInit {
 
   onEditWidget() {
     if (this.widgetId === 'undefined') {
-      this.newWidget = new WidgetYoutube("", "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL, this.newWidgetName);
+      this.newWidget = {name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'YOUTUBE'};
       this.widgetService.createWidget(this.pageId, this.newWidget)
         .subscribe(
           (widgets: Widget[]) => {
@@ -55,18 +55,15 @@ export class WidgetYoutubeComponent implements OnInit {
         );
     } else {
       if (this.newWidgetText === '') {
-        // @ts-ignore
         this.newWidgetText = this.widget.text;
       }
       if (this.newWidgetWidth === '') {
-        // @ts-ignore
         this.newWidgetWidth = this.widget.width;
       }
       if (this.newWidgetURL === '') {
-        // @ts-ignore
         this.newWidgetURL = this.widget.url;
       }
-      this.newWidget = new WidgetYoutube(this.widgetId, "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL, this.newWidgetName);
+      this.newWidget = {name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'YOUTUBE'};
       this.widgetService.updateWidget(this.widgetId, this.newWidget)
         .subscribe(
           (widget: Widget) => {

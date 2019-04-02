@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         (user: User) => {
           this.loginUser = user;
           // in user.service, if response is empty, return undefined
-          if (this.loginUser === undefined) {
+          if (this.loginUser === undefined || this.loginUser === null) {
             this.errorFlag = true;
           } else {
             this.router.navigate(['/user', this.loginUser._id]);

@@ -12,7 +12,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 export class WebsiteNewComponent implements OnInit {
 
   userId: string;
-  newWebsite: Website;
+  newWebsite;
   newWebsiteName: string;
   newWebsiteDescription: string;
   websites: Website[];
@@ -36,7 +36,7 @@ export class WebsiteNewComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
+    this.newWebsite = { name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
     this.websiteService.createWebsite(this.userId, this.newWebsite)
       .subscribe(
         (websites: Website[]) => {

@@ -12,7 +12,7 @@ export class WebsiteService {
   constructor(private http: Http) {}
 
   createWebsite(userId: string, website: Website) {
-    website._id = String(Math.floor(Math.random() * 1000) + 1);
+    // website._id = String(Math.floor(Math.random() * 1000) + 1);
     website.developerId = userId;
     return this.http.post(this.baseUrl + '/api/user/' + userId + '/website', website)
       .map((res: Response) => {
@@ -34,7 +34,7 @@ export class WebsiteService {
       });
   }
 
-  updateWebsite(websiteId: string, newWebsite: Website) {
+  updateWebsite(websiteId: string, newWebsite) {
     return this.http.put(this.baseUrl + '/api/website/' + websiteId, newWebsite)
       .map((res: Response) => {
         return res.json();

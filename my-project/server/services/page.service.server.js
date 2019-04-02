@@ -1,5 +1,7 @@
 module.exports = app => {
 
+  var pageModel = require('../models/page/page.model.server');
+
   var pages = [
     {_id: "321", name: "Post 1", websiteId: "456", description: "Lorem"},
     {_id: "432", name: "Post 2", websiteId: "456", description: "Lorem"},
@@ -12,60 +14,58 @@ module.exports = app => {
   app.put("/api/page/:pid", updatePage);
   app.delete("/api/page/:pid", deletePage);
 
-  function findPagesByWebsiteId(websiteId) {
-    var ans = [];
-    for (var i = 0; i < pages.length; ++i) {
-      if (pages[i].websiteId === websiteId) {
-        ans.push(pages[i]);
-      }
-    }
-    return ans;
-  }
-
   function createPage(req, res) {
     const wid = req.params['wid'];
     var page = req.body;
-    pages.push(page);
-    var ans = findPagesByWebsiteId(wid);
-    res.json(ans);
+    pageModel.createPage(wid, page)
+      .then((page) => {
+        res.json(page);
+      }, (error) => {
+        if (error) {
+          res.status(400).send(error);
+        }
+      });
   }
 
   function findAllPagesForWebsite(req, res) {
     const wid = req.params['wid'];
-    var pages = findPagesByWebsiteId(wid);
-    res.json(pages);
+    pageModel.findAllPagesForWebsite(wid)
+      .then((pages) => {
+        res.json(pages);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
   function findPageById(req, res) {
     const pid = req.params['pid'];
-    var page = pages.find((page) => {
-      return page._id === pid;
-    });
-    res.json(page);
+    pageModel.findPageById(pid)
+      .then((page) => {
+        res.json(page);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
   function updatePage(req, res) {
     const pid = req.params["pid"];
     var page = req.body;
-    for (var i = 0; i < pages.length; ++i) {
-      if (pages[i]._id === pid) {
-        pages[i].name = page.name;
-        pages[i].description = page.description;
-        res.status(200).send(page);
-        return;
-      }
-    }
-    res.status(404).send("Page Not Found");
+    pageModel.updatePage(pid, page)
+      .then(page => {
+        res.json(page);
+      }, error => {
+        res.status(400).send(error);
+      });
   }
 
   function deletePage(req, res) {
     const pid = req.params["pid"];
-    pages.forEach((page, index) => {
-      if (page._id === pid) {
-        pages.splice(index, 1);
-      }
-    });
-    res.json(pages);
+    pageModel.deletePage(pid)
+      .then((pages) => {
+        res.json(pages);
+      }, (error) => {
+        res.status(400).send(error);
+      });
   }
 
 };

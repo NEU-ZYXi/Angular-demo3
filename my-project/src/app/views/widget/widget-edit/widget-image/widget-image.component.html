@@ -67,8 +67,11 @@
     <input name="websiteId" value="{{ websiteId }}" style="display: none;">
     <input name="pageId" value="{{ pageId }}" style="display: none;">
     <input name="userId" value="{{ userId }}" style="display: none;">
-    <button class="btn btn-primary btn-block" type="submit" (click)="onClick()">Upload Image</button>
-    <button *ngIf="editFlag" class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
+    <button class="btn btn-primary btn-block" type="submit">Upload Image</button>
+    <br>
+    <a class="btn btn-primary btn-block "
+       [routerLink]="['/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']" >Choose From Flickr</a>
+    <button *ngIf="editFlag" class="btn btn-danger btn-block" (click)="onDelete()" type="button">Delete</button>
   </form>
 </div>
 

@@ -15,7 +15,7 @@
 <div class="container">
   <ul class="list-group" *ngFor="let type of widgetTypes">
     <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget(type)">{{ type }}</a>
+      <a class="text-blue" (click)="onNewWidget(type)" style="cursor:pointer; color: #337ab7;">{{ type }}</a>
     </li>
   </ul>
 </div>

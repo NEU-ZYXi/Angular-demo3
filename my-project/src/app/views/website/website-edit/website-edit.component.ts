@@ -14,7 +14,7 @@ export class WebsiteEditComponent implements OnInit {
 
   userId: string;
   websiteId: string;
-  website: Website = {_id: "", name: "", developerId: "", description: ""};
+  website = { name: "", developerId: "", description: ""};
   websites: Website[];
   websiteIdObs = new Subject<string>();
   @ViewChild('f') websiteForm: NgForm;

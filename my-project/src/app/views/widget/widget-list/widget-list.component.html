@@ -33,9 +33,21 @@
         <h5 *ngSwitchCase="5">{{ widget.text }}</h5>
         <h3 *ngSwitchDefault>{{ widget.text }}</h3>
       </div>
-      <img *ngSwitchCase="'IMAGE'" src="{{ widget.url }}" alt="" width="300">
-      <iframe *ngSwitchCase="'YOUTUBE'" width="300" [src]="widget.url | safe"></iframe>
+      <img *ngSwitchCase="'IMAGE'" src="{{ widget.url }}" alt="" width="400">
+      <iframe *ngSwitchCase="'YOUTUBE'" width="400" [src]="widget.url | safe"></iframe>
       <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
+      <div *ngSwitchCase="'TEXT INPUT'">
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        </div>
+
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+               placeholder="{{widget.placeholder}}" class="form-control"/>
+
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}</textarea>
+      </div>
       <p *ngSwitchDefault><br><br></p>
     </div>
   </div>

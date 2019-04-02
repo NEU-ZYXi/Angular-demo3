@@ -15,8 +15,8 @@ export class RegisterComponent implements OnInit {
   regUsername: string;
   regPassword: string;
   regVerifiedPassword: string;
-  user: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
-  loginUser: User = {_id: '', username: '', password: '', firstName: '', lastName: ''};
+  user = { username: '', password: '', firstName: '', lastName: '', email: '', phone: ''};
+  loginUser = { _id: '', username: '', password: '', firstName: '', lastName: '', email: '', phone: ''};
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (user: User) => {
           this.loginUser = user;
-          this.router.navigate(['/user', this.loginUser._id])
+          this.router.navigate(['/user', this.loginUser._id]);
         }
       );
   }

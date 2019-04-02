@@ -1,4 +1,4 @@
-import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../models/widget.model';
+import {Widget} from '../models/widget.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Page} from '../models/page.model';
 import {text} from '@angular/core/src/render3';
@@ -15,13 +15,10 @@ export class WidgetService {
 
   private widgetChosen = new BehaviorSubject('DEFAULT');
   currentWidgetType = this.widgetChosen.asObservable();
-  widgetTypes: string[] = [
-    "Header", "Label", "HTML", "Text Input", "Link", "Button", "Image", "YouTube", "Data Table", "Repeater"
-  ];
+  widgetTypes: string[] = ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT INPUT'];
   editFlag = false;
 
   createWidget(pageId: string, widget: Widget) {
-    widget._id = String(Math.floor(Math.random() * 1000) + 1);
     widget.pageId = pageId;
     return this.http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget)
       .map((res: Response) => {

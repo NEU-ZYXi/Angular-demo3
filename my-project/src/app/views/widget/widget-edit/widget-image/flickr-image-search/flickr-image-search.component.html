@@ -1,0 +1,50 @@
+<nav class="navbar fixed-top bc-grey">
+  <div class="container-fluid">
+    <div class="navbar-brand navbar-light">
+      <a routerLink="../" class="float-left text-black">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="./" class="text-grey">
+        Widget Edit
+      </a>
+    </div>
+    <a (click)="onEditWidget()" style="cursor: pointer" class="text-black">
+      <i class="fas fa-check"></i>
+    </a>
+  </div>
+</nav>
+
+<div class = "container">
+  <div class="input-group">
+    <input [(ngModel)]="searchText" type="text" class="form-control">
+    <span class="input-group-btn">
+            <a (click)="searchPhotos()" class="btn btn-default" type="button">
+                <i class="fas fa-search"></i>
+            </a>
+        </span>
+  </div>
+
+  <div class="row">
+    <!--<div *ngFor = "let pic of photos['photo']"-->
+    <div *ngFor = "let pic of photos['photo']"
+         class="col-xs-4">
+      <img    (click)="selectPhoto(pic)"
+              width="100%"
+              [src] = "['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']"/>
+
+      <!--[src] = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + "s.jpg"/>-->
+      <p></p>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar fixed-bottom bc-grey">
+  <div class="container-fluid">
+    <div class="ml-auto">
+      <a [routerLink]="['/user', userId]" class="text-blue float-right">
+        <i class="fas fa-user"></i>
+      </a>
+    </div>
+  </div>
+</nav>

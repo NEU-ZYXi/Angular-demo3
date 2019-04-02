@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   username: string;
 
   // object needs to be initialized to avoid undefined on ngOnInit()
-  user: User = {_id: "", username: "", password: "", firstName: "", lastName: ""};
+  user = { username: '', password: '', firstName: '', lastName: '', email: '', phone: ''};
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
 
@@ -40,8 +40,8 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.userId, this.user)
       .subscribe(
         (user: User) => {
-          this.user = user;
           alert("Successfully update your profile");
+          this.user = user;
         }
       );
   }

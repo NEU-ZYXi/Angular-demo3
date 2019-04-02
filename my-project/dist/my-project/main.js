@@ -48,6 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./views/widget/widget-list/widget-list.component */ "./src/app/views/widget/widget-list/widget-list.component.ts");
 /* harmony import */ var _views_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./views/widget/widget-chooser/widget-chooser.component */ "./src/app/views/widget/widget-chooser/widget-chooser.component.ts");
 /* harmony import */ var _views_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-edit.component */ "./src/app/views/widget/widget-edit/widget-edit.component.ts");
+/* harmony import */ var _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
+
 
 
 
@@ -77,6 +79,7 @@ var routes = [
     { path: 'user/:uid/website/:wid/page/:pid/widget', component: _views_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_12__["WidgetListComponent"] },
     { path: 'user/:uid/website/:wid/page/:pid/widget/new', component: _views_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_13__["WidgetChooserComponent"] },
     { path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: _views_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_14__["WidgetEditComponent"] },
+    { path: 'user/:uid/website/:wid/page/:pid/widget/:wgid/flickr', component: _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_15__["FlickrImageSearchComponent"] },
     { path: '**', redirectTo: 'login' }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -186,6 +189,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_safepipe__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./services/safepipe */ "./src/app/services/safepipe.ts");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var _directives_sortable_directive__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./directives/sortable.directive */ "./src/app/directives/sortable.directive.ts");
+/* harmony import */ var ngx_quill_editor__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ngx-quill-editor */ "./node_modules/ngx-quill-editor/index.js");
+/* harmony import */ var _views_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-html/widget-html.component */ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.ts");
+/* harmony import */ var _views_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-text/widget-text.component */ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.ts");
+/* harmony import */ var _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
+/* harmony import */ var _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./services/flickr.service.client */ "./src/app/services/flickr.service.client.ts");
+
+
+
+
+
 
 
 
@@ -237,15 +250,19 @@ var AppModule = /** @class */ (function () {
                 _views_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_19__["WidgetImageComponent"],
                 _views_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_20__["WidgetYoutubeComponent"],
                 _services_safepipe__WEBPACK_IMPORTED_MODULE_25__["SafePipe"],
-                _directives_sortable_directive__WEBPACK_IMPORTED_MODULE_27__["SortableDirective"]
+                _directives_sortable_directive__WEBPACK_IMPORTED_MODULE_27__["SortableDirective"],
+                _views_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_29__["WidgetHtmlComponent"],
+                _views_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_30__["WidgetTextComponent"],
+                _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_31__["FlickrImageSearchComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_26__["HttpModule"]
+                _angular_http__WEBPACK_IMPORTED_MODULE_26__["HttpModule"],
+                ngx_quill_editor__WEBPACK_IMPORTED_MODULE_28__["QuillEditorModule"]
             ],
-            providers: [_services_user_service_client__WEBPACK_IMPORTED_MODULE_21__["UserService"], _services_website_service_client__WEBPACK_IMPORTED_MODULE_22__["WebsiteService"], _services_page_service_client__WEBPACK_IMPORTED_MODULE_23__["PageService"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_24__["WidgetService"]],
+            providers: [_services_user_service_client__WEBPACK_IMPORTED_MODULE_21__["UserService"], _services_website_service_client__WEBPACK_IMPORTED_MODULE_22__["WebsiteService"], _services_page_service_client__WEBPACK_IMPORTED_MODULE_23__["PageService"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_24__["WidgetService"], _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_32__["FlickrService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -310,60 +327,41 @@ var SortableDirective = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/models/widget.model.ts":
-/*!****************************************!*\
-  !*** ./src/app/models/widget.model.ts ***!
-  \****************************************/
-/*! exports provided: WidgetHeading, WidgetImage, WidgetHtml, WidgetYoutube */
+/***/ "./src/app/services/flickr.service.client.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/flickr.service.client.ts ***!
+  \***************************************************/
+/*! exports provided: FlickrService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetHeading", function() { return WidgetHeading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetImage", function() { return WidgetImage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetHtml", function() { return WidgetHtml; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetYoutube", function() { return WidgetYoutube; });
-var WidgetHeading = /** @class */ (function () {
-    function WidgetHeading(_id, widgetType, pageId, size, text) {
-        this._id = _id;
-        this.widgetType = widgetType;
-        this.pageId = pageId;
-        this.size = size;
-        this.text = text;
-    }
-    return WidgetHeading;
-}());
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrService", function() { return FlickrService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
-var WidgetImage = /** @class */ (function () {
-    function WidgetImage(_id, widgetType, pageId, width, url) {
-        this._id = _id;
-        this.widgetType = widgetType;
-        this.pageId = pageId;
-        this.width = width;
-        this.url = url;
-    }
-    return WidgetImage;
-}());
 
-var WidgetHtml = /** @class */ (function () {
-    function WidgetHtml(_id, widgetType, pageId, text) {
-        this._id = _id;
-        this.widgetType = widgetType;
-        this.pageId = pageId;
-        this.text = text;
-    }
-    return WidgetHtml;
-}());
 
-var WidgetYoutube = /** @class */ (function () {
-    function WidgetYoutube(_id, widgetType, pageId, width, url) {
-        this._id = _id;
-        this.widgetType = widgetType;
-        this.pageId = pageId;
-        this.width = width;
-        this.url = url;
+var FlickrService = /** @class */ (function () {
+    function FlickrService(_http) {
+        this._http = _http;
+        this.key = '90ea0df0685933f65ea96fab852a3023';
+        this.secret = '59b7fb7ceb0a467b';
+        this.urlBase = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
     }
-    return WidgetYoutube;
+    FlickrService.prototype.searchPhotos = function (searchTerm) {
+        var url = this.urlBase
+            .replace('API_KEY', this.key)
+            .replace('TEXT', searchTerm);
+        return this._http.get(url);
+    };
+    FlickrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])() // needed as we're injecting Http service into this service
+        ,
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
+    ], FlickrService);
+    return FlickrService;
 }());
 
 
@@ -394,7 +392,7 @@ var PageService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].baseUrl;
     }
     PageService.prototype.createPage = function (websiteId, page) {
-        page._id = String(Math.floor(Math.random() * 1000) + 1);
+        // page._id = String(Math.floor(Math.random() * 1000) + 1);
         page.websiteId = websiteId;
         return this.http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page)
             .map(function (res) {
@@ -499,7 +497,7 @@ var UserService = /** @class */ (function () {
     }
     // all functions return an observable, .subscribe whenever used
     UserService.prototype.createUser = function (user) {
-        user._id = String(Math.floor(Math.random() * 1000) + 1);
+        // user._id = String(Math.floor(Math.random() * 1000) + 1);
         return this.http.post(this.baseUrl + '/api/user', user)
             .map(function (res) {
             return res.json();
@@ -571,7 +569,7 @@ var WebsiteService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].baseUrl;
     }
     WebsiteService.prototype.createWebsite = function (userId, website) {
-        website._id = String(Math.floor(Math.random() * 1000) + 1);
+        // website._id = String(Math.floor(Math.random() * 1000) + 1);
         website.developerId = userId;
         return this.http.post(this.baseUrl + '/api/user/' + userId + '/website', website)
             .map(function (res) {
@@ -639,13 +637,10 @@ var WidgetService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
         this.widgetChosen = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('DEFAULT');
         this.currentWidgetType = this.widgetChosen.asObservable();
-        this.widgetTypes = [
-            "Header", "Label", "HTML", "Text Input", "Link", "Button", "Image", "YouTube", "Data Table", "Repeater"
-        ];
+        this.widgetTypes = ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT INPUT'];
         this.editFlag = false;
     }
     WidgetService.prototype.createWidget = function (pageId, widget) {
-        widget._id = String(Math.floor(Math.random() * 1000) + 1);
         widget.pageId = pageId;
         return this.http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget)
             .map(function (res) {
@@ -738,7 +733,7 @@ var PageEditComponent = /** @class */ (function () {
         this.pageService = pageService;
         this.route = route;
         this.router = router;
-        this.page = { _id: "", name: "", websiteId: "", description: "" };
+        this.page = { name: "", title: "", websiteId: "", description: "" };
     }
     PageEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -916,7 +911,7 @@ var PageNewComponent = /** @class */ (function () {
             return false;
         }
         else {
-            this.newPage = { _id: '', name: this.newPageName, websiteId: this.websiteId, description: '' };
+            this.newPage = { name: this.newPageName, title: this.newPageTitle, websiteId: this.websiteId, description: this.newPageDescription };
             this.pageService.createPage(this.websiteId, this.newPage)
                 .subscribe(function (pages) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -999,7 +994,7 @@ var LoginComponent = /** @class */ (function () {
             .subscribe(function (user) {
             _this.loginUser = user;
             // in user.service, if response is empty, return undefined
-            if (_this.loginUser === undefined) {
+            if (_this.loginUser === undefined || _this.loginUser === null) {
                 _this.errorFlag = true;
             }
             else {
@@ -1076,7 +1071,7 @@ var ProfileComponent = /** @class */ (function () {
         this.userService = userService;
         this.router = router;
         // object needs to be initialized to avoid undefined on ngOnInit()
-        this.user = { _id: "", username: "", password: "", firstName: "", lastName: "" };
+        this.user = { username: '', password: '', firstName: '', lastName: '', email: '', phone: '' };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1094,8 +1089,8 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.userService.updateUser(this.userId, this.user)
             .subscribe(function (user) {
-            _this.user = user;
             alert("Successfully update your profile");
+            _this.user = user;
         });
     };
     ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1159,8 +1154,8 @@ var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(userService, router) {
         this.userService = userService;
         this.router = router;
-        this.user = { _id: '', username: '', password: '', firstName: '', lastName: '' };
-        this.loginUser = { _id: '', username: '', password: '', firstName: '', lastName: '' };
+        this.user = { username: '', password: '', firstName: '', lastName: '', email: '', phone: '' };
+        this.loginUser = { _id: '', username: '', password: '', firstName: '', lastName: '', email: '', phone: '' };
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
@@ -1245,7 +1240,7 @@ var WebsiteEditComponent = /** @class */ (function () {
         this.websiteService = websiteService;
         this.route = route;
         this.router = router;
-        this.website = { _id: "", name: "", developerId: "", description: "" };
+        this.website = { name: "", developerId: "", description: "" };
         this.websiteIdObs = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
     }
     WebsiteEditComponent.prototype.ngOnInit = function () {
@@ -1443,7 +1438,7 @@ var WebsiteNewComponent = /** @class */ (function () {
     };
     WebsiteNewComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.newWebsite = { _id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription };
+        this.newWebsite = { name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription };
         this.websiteService.createWebsite(this.userId, this.newWebsite)
             .subscribe(function (websites) {
             _this.websites = websites;
@@ -1487,7 +1482,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Choose Widget\n      </a>\n    </div>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <ul class=\"list-group\" *ngFor=\"let type of widgetTypes\">\n    <li class=\"list-group-item border-0\">\n      <a [routerLink]=\"['../', widgetId]\" class=\"text-blue\" (click)=\"onNewWidget(type)\">{{ type }}</a>\n    </li>\n  </ul>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Choose Widget\n      </a>\n    </div>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <ul class=\"list-group\" *ngFor=\"let type of widgetTypes\">\n    <li class=\"list-group-item border-0\">\n      <a class=\"text-blue\" (click)=\"onNewWidget(type)\" style=\"cursor:pointer; color: #337ab7;\">{{ type }}</a>\n    </li>\n  </ul>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1510,15 +1505,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var WidgetChooserComponent = /** @class */ (function () {
-    function WidgetChooserComponent(widgetService, route) {
+    function WidgetChooserComponent(widgetService, route, router) {
         this.widgetService = widgetService;
         this.route = route;
+        this.router = router;
     }
     WidgetChooserComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .subscribe(function (params) {
             _this.userId = params['uid'];
+            _this.pageId = params['pid'];
             _this.widgetId = params['wgid'];
         });
         this.widgetTypes = this.widgetService.widgetTypes;
@@ -1528,7 +1525,13 @@ var WidgetChooserComponent = /** @class */ (function () {
         });
     };
     WidgetChooserComponent.prototype.onNewWidget = function (widgetType) {
+        var _this = this;
         this.widgetService.chooseNewType(widgetType);
+        this.newWidget = { name: '', text: '', widgetType: this.widgetType };
+        this.widgetService.createWidget(this.pageId, this.newWidget)
+            .subscribe((function (widget) {
+            _this.router.navigate(['../', widget._id], { relativeTo: _this.route });
+        }));
     };
     WidgetChooserComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
@@ -1539,7 +1542,7 @@ var WidgetChooserComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-chooser.component.html */ "./src/app/views/widget/widget-chooser/widget-chooser.component.html"),
             styles: [__webpack_require__(/*! ./widget-chooser.component.css */ "./src/app/views/widget/widget-chooser/widget-chooser.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], WidgetChooserComponent);
     return WidgetChooserComponent;
 }());
@@ -1566,7 +1569,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"widget !== undefined\" [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../\">Back</button>\n  </div>\n</div>\n\n<div *ngIf=\"widget === undefined\" [ngSwitch]=\"widgetChosen\">\n  <div *ngSwitchCase=\"'Header'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'Image'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YouTube'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../new\">Back</button>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"widget !== undefined\" [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchCase=\"'HTML'\">\n    <app-widget-html></app-widget-html>\n  </div>\n  <div *ngSwitchCase=\"'TEXT INPUT'\">\n    <app-widget-text></app-widget-text>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../\">Back</button>\n  </div>\n</div>\n\n<div *ngIf=\"widget === undefined\" [ngSwitch]=\"widgetChosen\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n  <div *ngSwitchCase=\"'HTML'\">\n    <app-widget-html></app-widget-html>\n  </div>\n  <div *ngSwitchCase=\"'TEXT INPUT'\">\n    <app-widget-text></app-widget-text>\n  </div>\n  <div *ngSwitchDefault>\n    <h1>This Widget Type is not DEFINED in assignment</h1>\n    <hr>\n    <button routerLink=\"../new\">Back</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1668,10 +1671,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetHeaderComponent", function() { return WidgetHeaderComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _models_widget_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../models/widget.model */ "./src/app/models/widget.model.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
 
 
 
@@ -1681,7 +1682,6 @@ var WidgetHeaderComponent = /** @class */ (function () {
         this.route = route;
         this.widgetService = widgetService;
         this.router = router;
-        this.widget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]("", "", "", null, "");
         this.newWidgetText = '';
         this.newWidgetSize = null;
         this.editFlag = false;
@@ -1705,7 +1705,7 @@ var WidgetHeaderComponent = /** @class */ (function () {
     WidgetHeaderComponent.prototype.onEditWidget = function () {
         var _this = this;
         if (this.widgetId === 'undefined') {
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"]("", "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
+            this.newWidget = { name: this.newWidgetName, size: this.newWidgetSize, text: this.newWidgetText, pageId: this.pageId, widgetType: 'HEADING' };
             this.widgetService.createWidget(this.pageId, this.newWidget)
                 .subscribe(function (widgets) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1713,15 +1713,13 @@ var WidgetHeaderComponent = /** @class */ (function () {
         }
         else {
             if (this.newWidgetText === '') {
-                // @ts-ignore
                 this.newWidgetText = this.widget.text;
             }
             if (this.newWidgetSize === null) {
-                // @ts-ignore
                 this.newWidgetSize = this.widget.size;
             }
             // console.log(this.newWidgetText);
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetHeading"](this.widgetId, "HEADING", this.pageId, this.newWidgetSize, this.newWidgetText);
+            this.newWidget = { name: this.newWidgetName, size: this.newWidgetSize, text: this.newWidgetText, pageId: this.pageId, widgetType: 'HEADING' };
             this.widgetService.updateWidget(this.widgetId, this.newWidget)
                 .subscribe(function (widget) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1741,9 +1739,221 @@ var WidgetHeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-header.component.html */ "./src/app/views/widget/widget-edit/widget-header/widget-header.component.html"),
             styles: [__webpack_require__(/*! ./widget-header.component.css */ "./src/app/views/widget/widget-edit/widget-header/widget-header.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], WidgetHeaderComponent);
     return WidgetHeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.css":
+/*!********************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-html/widget-html.component.css ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL3dpZGdldC93aWRnZXQtZWRpdC93aWRnZXQtaHRtbC93aWRnZXQtaHRtbC5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.html":
+/*!*********************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-html/widget-html.component.html ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form novalidate name=\"model.myform\">\n    <div class=\"form-group\">\n      <label for=\"Name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"Name\"\n             name=\"widname\"\n             placeholder=\"{{ widget.name }}\"\n             required>\n      <!--<span class=\"alert-class\"-->\n            <!--*ngIf=\"flag\">{{alert}}</span>-->\n    </div>\n    <!--<div ng-model=\"model.widget.text\"-->\n    <!--text-angular-->\n    <!--ta-toolbar=\"[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],-->\n    <!--['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],-->\n    <!--['indent','outdent'],['html']]\">-->\n    <!--</div>-->\n\n    <!-- use with ngModel -->\n    <quill-editor [(ngModel)]=\"widget.text\" name=\"text\"></quill-editor>\n    <!--[options]=\"editorOptions\"-->\n    <!--(blur)=\"onEditorBlured($event)\"-->\n    <!--(focus)=\"onEditorFocused($event)\"-->\n    <!--(ready)=\"onEditorCreated($event)\"-->\n    <!--(change)=\"onContentChanged($event)\"-->\n  </form>\n  <p></p>\n  <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-html/widget-html.component.ts ***!
+  \*******************************************************************************/
+/*! exports provided: WidgetHtmlComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetHtmlComponent", function() { return WidgetHtmlComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
+
+
+
+
+var WidgetHtmlComponent = /** @class */ (function () {
+    function WidgetHtmlComponent(route, widgetService, router) {
+        this.route = route;
+        this.widgetService = widgetService;
+        this.router = router;
+        this.newWidgetText = '';
+        this.editFlag = false;
+    }
+    WidgetHtmlComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .subscribe(function (params) {
+            _this.userId = params['uid'];
+            _this.widgetId = params['wgid'];
+            _this.pageId = params['pid'];
+        });
+        if (this.widgetId !== 'undefined') {
+            this.widgetService.findWidgetById(this.widgetId)
+                .subscribe(function (widget) {
+                _this.widget = widget;
+            });
+        }
+        this.editFlag = this.widgetService.editFlag;
+    };
+    WidgetHtmlComponent.prototype.onEditWidget = function () {
+        var _this = this;
+        if (this.widgetId === 'undefined') {
+            this.newWidget = { name: this.newWidgetName, text: this.newWidgetText, pageId: this.pageId, widgetType: 'HTML' };
+            this.widgetService.createWidget(this.pageId, this.newWidget)
+                .subscribe(function (widgets) {
+                _this.router.navigate(['../'], { relativeTo: _this.route });
+            });
+        }
+        else {
+            if (this.newWidgetText === '') {
+                this.newWidgetText = this.widget.text;
+            }
+            if (this.newWidgetName === '') {
+                this.newWidgetName = this.widget.name;
+            }
+            // console.log(this.newWidgetText);
+            this.newWidget = { name: this.newWidgetName, text: this.newWidgetText, pageId: this.pageId, widgetType: 'HTML' };
+            this.widgetService.updateWidget(this.widgetId, this.newWidget)
+                .subscribe(function (widget) {
+                _this.router.navigate(['../'], { relativeTo: _this.route });
+            });
+        }
+    };
+    WidgetHtmlComponent.prototype.onDelete = function () {
+        var _this = this;
+        this.widgetService.deleteWidget(this.widgetId)
+            .subscribe(function (widgets) {
+            _this.router.navigate(['../'], { relativeTo: _this.route });
+        });
+    };
+    WidgetHtmlComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-widget-html',
+            template: __webpack_require__(/*! ./widget-html.component.html */ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.html"),
+            styles: [__webpack_require__(/*! ./widget-html.component.css */ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], WidgetHtmlComponent);
+    return WidgetHtmlComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css":
+/*!*************************************************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL3dpZGdldC93aWRnZXQtZWRpdC93aWRnZXQtaW1hZ2UvZmxpY2tyLWltYWdlLXNlYXJjaC9mbGlja3ItaW1hZ2Utc2VhcmNoLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class = \"container\">\n  <div class=\"input-group\">\n    <input [(ngModel)]=\"searchText\" type=\"text\" class=\"form-control\">\n    <span class=\"input-group-btn\">\n            <a (click)=\"searchPhotos()\" class=\"btn btn-default\" type=\"button\">\n                <i class=\"fas fa-search\"></i>\n            </a>\n        </span>\n  </div>\n\n  <div class=\"row\">\n    <!--<div *ngFor = \"let pic of photos['photo']\"-->\n    <div *ngFor = \"let pic of photos['photo']\"\n         class=\"col-xs-4\">\n      <img    (click)=\"selectPhoto(pic)\"\n              width=\"100%\"\n              [src] = \"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']\"/>\n\n      <!--[src] = \"https://farm\" + photo.farm + \".staticflickr.com/\" + photo.server + \"/\" + photo.id + \"_\" + photo.secret + \"_\" + \"s.jpg\"/>-->\n      <p></p>\n    </div>\n  </div>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts":
+/*!************************************************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts ***!
+  \************************************************************************************************************/
+/*! exports provided: FlickrImageSearchComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrImageSearchComponent", function() { return FlickrImageSearchComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../services/flickr.service.client */ "./src/app/services/flickr.service.client.ts");
+
+
+
+
+
+var FlickrImageSearchComponent = /** @class */ (function () {
+    function FlickrImageSearchComponent(flickrService, widgetService, router, route) {
+        this.flickrService = flickrService;
+        this.widgetService = widgetService;
+        this.router = router;
+        this.route = route;
+    }
+    FlickrImageSearchComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .subscribe(function (params) {
+            _this.userId = params['uid'];
+            _this.widgetId = params['wgid'];
+            _this.pageId = params['pid'];
+            _this.websiteId = params['wid'];
+        });
+    };
+    FlickrImageSearchComponent.prototype.searchPhotos = function () {
+        var _this = this;
+        this.flickrService
+            .searchPhotos(this.searchText)
+            .subscribe(function (data) {
+            var val = data._body;
+            val = val.replace('jsonFlickrApi(', '');
+            val = val.substring(0, val.length - 1);
+            val = JSON.parse(val);
+            _this.photos = val.photos;
+            console.log(_this.photos);
+        });
+    };
+    FlickrImageSearchComponent.prototype.selectPhoto = function (photo) {
+        var _this = this;
+        var url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
+        url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
+        // console.log("flickr: " + url);
+        var widget = {
+            pageId: this.pageId,
+            url: url
+        };
+        this.widgetService
+            .updateWidget(this.widgetId, widget)
+            .subscribe(function (data) {
+            _this.router.navigate(['/user/' + _this.userId + '/website/' + _this.websiteId + '/page/' + _this.pageId + '/widget/' + _this.widgetId]);
+        });
+    };
+    FlickrImageSearchComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-flickr-image-search',
+            template: __webpack_require__(/*! ./flickr-image-search.component.html */ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html"),
+            styles: [__webpack_require__(/*! ./flickr-image-search.component.css */ "./src/app/views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_flickr_service_client__WEBPACK_IMPORTED_MODULE_4__["FlickrService"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_2__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+    ], FlickrImageSearchComponent);
+    return FlickrImageSearchComponent;
 }());
 
 
@@ -1768,7 +1978,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n  </form>\n  <form ngNoForm action=\"{{ baseUrl }}/api/upload\" method=\"POST\" enctype=\"multipart/form-data\">\n    <div class=\"form-group\">\n      <label>Upload</label>\n      <div class=\"file-upload\">\n        <input type=\"file\"\n               id=\"avatar\" name=\"avatar\"\n               accept=\"image/png, image/jpeg\">\n      </div>\n    </div>\n    <input name=\"widgetId\" value=\"{{ widgetId }}\" style=\"display: none;\">\n    <input name=\"websiteId\" value=\"{{ websiteId }}\" style=\"display: none;\">\n    <input name=\"pageId\" value=\"{{ pageId }}\" style=\"display: none;\">\n    <input name=\"userId\" value=\"{{ userId }}\" style=\"display: none;\">\n    <button class=\"btn btn-primary btn-block\" type=\"submit\" (click)=\"onClick()\">Upload Image</button>\n    <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetName\"\n        placeholder=\"{{ widget.name }}\"\n        [(ngModel)]=\"newWidgetName\">\n    </div>\n    <div class=\"form-group\">\n      <label>Text</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetText\"\n        placeholder=\"{{ widget.text }}\"\n        [(ngModel)]=\"newWidgetText\">\n    </div>\n    <div class=\"form-group\">\n      <label>URL</label>\n      <input\n        type=\"url\"\n        class=\"form-control\"\n        name=\"widgetURL\"\n        placeholder=\"{{ widget.url }}\"\n        [(ngModel)]=\"newWidgetURL\">\n    </div>\n    <div class=\"form-group\">\n      <label>Width</label>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        name=\"widgetWidth\"\n        placeholder=\"{{ widget.width }}\"\n        [(ngModel)]=\"newWidgetWidth\">\n    </div>\n  </form>\n  <form ngNoForm action=\"{{ baseUrl }}/api/upload\" method=\"POST\" enctype=\"multipart/form-data\">\n    <div class=\"form-group\">\n      <label>Upload</label>\n      <div class=\"file-upload\">\n        <input type=\"file\"\n               id=\"avatar\" name=\"avatar\"\n               accept=\"image/png, image/jpeg\">\n      </div>\n    </div>\n    <input name=\"widgetId\" value=\"{{ widgetId }}\" style=\"display: none;\">\n    <input name=\"websiteId\" value=\"{{ websiteId }}\" style=\"display: none;\">\n    <input name=\"pageId\" value=\"{{ pageId }}\" style=\"display: none;\">\n    <input name=\"userId\" value=\"{{ userId }}\" style=\"display: none;\">\n    <button class=\"btn btn-primary btn-block\" type=\"submit\">Upload Image</button>\n    <br>\n    <a class=\"btn btn-primary btn-block \"\n       [routerLink]=\"['/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']\" >Choose From Flickr</a>\n    <button *ngIf=\"editFlag\" class=\"btn btn-danger btn-block\" (click)=\"onDelete()\" type=\"button\">Delete</button>\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1784,10 +1994,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetImageComponent", function() { return WidgetImageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _models_widget_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../models/widget.model */ "./src/app/models/widget.model.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
 
 
 
@@ -1797,7 +2005,6 @@ var WidgetImageComponent = /** @class */ (function () {
         this.route = route;
         this.widgetService = widgetService;
         this.router = router;
-        this.widget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetImage"]("", "", "", "", "");
         this.newWidgetText = '';
         this.newWidgetWidth = '';
         this.newWidgetURL = '';
@@ -1824,7 +2031,7 @@ var WidgetImageComponent = /** @class */ (function () {
     WidgetImageComponent.prototype.onEditWidget = function () {
         var _this = this;
         if (this.widgetId === 'undefined') {
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetImage"]("", "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+            this.newWidget = { name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'IMAGE' };
             this.widgetService.createWidget(this.pageId, this.newWidget)
                 .subscribe(function (widgets) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1832,18 +2039,15 @@ var WidgetImageComponent = /** @class */ (function () {
         }
         else {
             if (this.newWidgetText === '') {
-                // @ts-ignore
                 this.newWidgetText = this.widget.text;
             }
             if (this.newWidgetWidth === '') {
-                // @ts-ignore
                 this.newWidgetWidth = this.widget.width;
             }
             if (this.newWidgetURL === '') {
-                // @ts-ignore
                 this.newWidgetURL = this.widget.url;
             }
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetImage"](this.widgetId, "IMAGE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+            this.newWidget = { name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'IMAGE' };
             this.widgetService.updateWidget(this.widgetId, this.newWidget)
                 .subscribe(function (widget) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1863,9 +2067,132 @@ var WidgetImageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-image.component.html */ "./src/app/views/widget/widget-edit/widget-image/widget-image.component.html"),
             styles: [__webpack_require__(/*! ./widget-image.component.css */ "./src/app/views/widget/widget-edit/widget-image/widget-image.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], WidgetImageComponent);
     return WidgetImageComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.css":
+/*!********************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-text/widget-text.component.css ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL3dpZGdldC93aWRnZXQtZWRpdC93aWRnZXQtdGV4dC93aWRnZXQtdGV4dC5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.html":
+/*!*********************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-text/widget-text.component.html ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widget Edit\n      </a>\n    </div>\n    <a (click)=\"onEditWidget()\" style=\"cursor: pointer\" class=\"text-black\">\n      <i class=\"fas fa-check\"></i>\n    </a>\n  </div>\n</nav>\n\n<div class=\"container\">\n  Text\n  <input [(ngModel)]=\"newWidgetText\" class=\"form-control\" placeholder=\"{{ widget.text }}\"/>\n  Rows\n  <input [(ngModel)]=\"newWidgetRows\" class=\"form-control\" type=\"number\" placeholder=\"{{ widget.rows }}\"/>\n\n  <label for=\"Name\">Name</label>\n  <div>\n    <input [(ngModel)]=\"newWidgetName\"\n           type=\"text\"\n           class=\"form-control\"\n           id=\"Name\"\n           name=\"name\"\n           placeholder=\"Name\">\n  </div>\n  Placeholder\n  <input [(ngModel)]=\"newWidgetPlaceholder\" class=\"form-control\" placeholder=\"{{ widget.placeholder }}\" required/>\n  <p></p>\n  <div class=\"input-group\">\n    <input type=\"text\"\n           readonly\n           value=\"Formatted\"\n           class=\"form-control\"/>\n    <span class=\"input-group-addon\">\n        <input [(ngModel)]=\"newWidgetFormatted\"\n               type=\"checkbox\"/>\n    </span>\n  </div>\n  <p></p>\n  <button class=\"btn btn-danger btn-block\" (click)=\"onDelete()\">Delete</button>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/app/views/widget/widget-edit/widget-text/widget-text.component.ts ***!
+  \*******************************************************************************/
+/*! exports provided: WidgetTextComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetTextComponent", function() { return WidgetTextComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
+
+
+
+
+var WidgetTextComponent = /** @class */ (function () {
+    function WidgetTextComponent(route, widgetService, router) {
+        this.route = route;
+        this.widgetService = widgetService;
+        this.router = router;
+        this.newWidgetText = '';
+        this.newWidgetRows = null;
+        this.newWidgetPlaceholder = '';
+        this.newWidgetFormatted = null;
+        this.editFlag = false;
+    }
+    WidgetTextComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .subscribe(function (params) {
+            _this.userId = params['uid'];
+            _this.widgetId = params['wgid'];
+            _this.pageId = params['pid'];
+        });
+        if (this.widgetId !== 'undefined') {
+            this.widgetService.findWidgetById(this.widgetId)
+                .subscribe(function (widget) {
+                _this.widget = widget;
+            });
+        }
+        this.editFlag = this.widgetService.editFlag;
+    };
+    WidgetTextComponent.prototype.onEditWidget = function () {
+        var _this = this;
+        if (this.widgetId === 'undefined') {
+            this.widget.widgetType = 'TEXT INPUT';
+            this.widgetService.createWidget(this.pageId, this.widget)
+                .subscribe(function (widgets) {
+                _this.router.navigate(['../'], { relativeTo: _this.route });
+            });
+        }
+        else {
+            if (this.newWidgetText === '') {
+                this.newWidgetText = this.widget.text;
+            }
+            if (this.newWidgetName === '') {
+                this.newWidgetName = this.widget.name;
+            }
+            if (this.newWidgetRows === null) {
+                this.newWidgetRows = this.widget.rows;
+            }
+            if (this.newWidgetPlaceholder === '') {
+                this.newWidgetPlaceholder = this.widget.placeholder;
+            }
+            if (this.newWidgetFormatted === null) {
+                this.newWidgetFormatted = this.widget.formatted;
+            }
+            this.newWidget = { name: this.newWidgetName, text: this.newWidgetText, pageId: this.pageId, rows: this.newWidgetRows,
+                placeholder: this.newWidgetPlaceholder, formatted: this.newWidgetFormatted, widgetType: 'TEXT INPUT' };
+            console.log(this.newWidget);
+            this.widgetService.updateWidget(this.widgetId, this.newWidget)
+                .subscribe(function (widget) {
+                _this.router.navigate(['../'], { relativeTo: _this.route });
+            });
+        }
+    };
+    WidgetTextComponent.prototype.onDelete = function () {
+        var _this = this;
+        this.widgetService.deleteWidget(this.widgetId)
+            .subscribe(function (widgets) {
+            _this.router.navigate(['../'], { relativeTo: _this.route });
+        });
+    };
+    WidgetTextComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-widget-text',
+            template: __webpack_require__(/*! ./widget-text.component.html */ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.html"),
+            styles: [__webpack_require__(/*! ./widget-text.component.css */ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], WidgetTextComponent);
+    return WidgetTextComponent;
 }());
 
 
@@ -1906,10 +2233,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetYoutubeComponent", function() { return WidgetYoutubeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _models_widget_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../models/widget.model */ "./src/app/models/widget.model.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
 
 
 
@@ -1919,7 +2244,6 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         this.route = route;
         this.widgetService = widgetService;
         this.router = router;
-        this.widget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]("", "", "", "", "");
         this.newWidgetText = '';
         this.newWidgetWidth = '';
         this.newWidgetURL = '';
@@ -1944,7 +2268,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
     WidgetYoutubeComponent.prototype.onEditWidget = function () {
         var _this = this;
         if (this.widgetId === 'undefined') {
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"]("", "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+            this.newWidget = { name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'YOUTUBE' };
             this.widgetService.createWidget(this.pageId, this.newWidget)
                 .subscribe(function (widgets) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1952,18 +2276,15 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         }
         else {
             if (this.newWidgetText === '') {
-                // @ts-ignore
                 this.newWidgetText = this.widget.text;
             }
             if (this.newWidgetWidth === '') {
-                // @ts-ignore
                 this.newWidgetWidth = this.widget.width;
             }
             if (this.newWidgetURL === '') {
-                // @ts-ignore
                 this.newWidgetURL = this.widget.url;
             }
-            this.newWidget = new _models_widget_model__WEBPACK_IMPORTED_MODULE_2__["WidgetYoutube"](this.widgetId, "YOUTUBE", this.pageId, this.newWidgetWidth, this.newWidgetURL);
+            this.newWidget = { name: this.newWidgetName, width: this.newWidgetWidth, text: this.newWidgetText, url: this.newWidgetURL, pageId: this.pageId, widgetType: 'YOUTUBE' };
             this.widgetService.updateWidget(this.widgetId, this.newWidget)
                 .subscribe(function (widget) {
                 _this.router.navigate(['../'], { relativeTo: _this.route });
@@ -1983,7 +2304,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-youtube.component.html */ "./src/app/views/widget/widget-edit/widget-youtube/widget-youtube.component.html"),
             styles: [__webpack_require__(/*! ./widget-youtube.component.css */ "./src/app/views/widget/widget-edit/widget-youtube/widget-youtube.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], WidgetYoutubeComponent);
     return WidgetYoutubeComponent;
 }());
@@ -2010,7 +2331,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widgets\n      </a>\n    </div>\n    <a routerLink=\"new\" class=\"text-black\">\n      <i class=\"fas fa-plus\"></i>\n    </a>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <div class=\"widget-list\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n    <div *ngFor=\"let widget of widgets\" [ngSwitch]=\"widget.widgetType\">\n      <a routerLink=\"./\" class=\"float-right text-black\">\n        <i class=\"fas fa-bars\"></i>\n      </a>\n      <a routerLink=\"{{ widget._id }}\" class=\"float-right text-blue\">\n        <i class=\"fas fa-cog\"></i>\n      </a>\n      <div *ngSwitchCase=\"'HEADING'\" [ngSwitch]=\"widget.size\">\n        <h1 *ngSwitchCase=\"1\">{{ widget.text }}</h1>\n        <h2 *ngSwitchCase=\"2\">{{ widget.text }}</h2>\n        <h3 *ngSwitchCase=\"3\">{{ widget.text }}</h3>\n        <h4 *ngSwitchCase=\"4\">{{ widget.text }}</h4>\n        <h5 *ngSwitchCase=\"5\">{{ widget.text }}</h5>\n        <h3 *ngSwitchDefault>{{ widget.text }}</h3>\n      </div>\n      <img *ngSwitchCase=\"'IMAGE'\" src=\"{{ widget.url }}\" alt=\"\" width=\"{{ widget.width }}\">\n      <iframe *ngSwitchCase=\"'YOUTUBE'\" width=\"{{ widget.width }}\" [src]=\"widget.url | safe\"></iframe>\n      <div *ngSwitchCase=\"'HTML'\" [innerHTML]=\"widget.text\"></div>\n      <p *ngSwitchDefault><br><br></p>\n    </div>\n  </div>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"\">\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-play\"></i>\n      </a>\n      &nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-eye\"></i>\n      </a>\n    </div>\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar fixed-top bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-brand navbar-light\">\n      <a routerLink=\"../../\" class=\"float-left text-black\">\n        <i class=\"fas fa-chevron-left\"></i>\n      </a>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-grey\">\n        Widgets\n      </a>\n    </div>\n    <a routerLink=\"new\" class=\"text-black\">\n      <i class=\"fas fa-plus\"></i>\n    </a>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <div class=\"widget-list\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n    <div *ngFor=\"let widget of widgets\" [ngSwitch]=\"widget.widgetType\">\n      <a routerLink=\"./\" class=\"float-right text-black\">\n        <i class=\"fas fa-bars\"></i>\n      </a>\n      <a routerLink=\"{{ widget._id }}\" class=\"float-right text-blue\">\n        <i class=\"fas fa-cog\"></i>\n      </a>\n      <div *ngSwitchCase=\"'HEADING'\" [ngSwitch]=\"widget.size\">\n        <h1 *ngSwitchCase=\"1\">{{ widget.text }}</h1>\n        <h2 *ngSwitchCase=\"2\">{{ widget.text }}</h2>\n        <h3 *ngSwitchCase=\"3\">{{ widget.text }}</h3>\n        <h4 *ngSwitchCase=\"4\">{{ widget.text }}</h4>\n        <h5 *ngSwitchCase=\"5\">{{ widget.text }}</h5>\n        <h3 *ngSwitchDefault>{{ widget.text }}</h3>\n      </div>\n      <img *ngSwitchCase=\"'IMAGE'\" src=\"{{ widget.url }}\" alt=\"\" width=\"400\">\n      <iframe *ngSwitchCase=\"'YOUTUBE'\" width=\"400\" [src]=\"widget.url | safe\"></iframe>\n      <div *ngSwitchCase=\"'HTML'\" [innerHTML]=\"widget.text\"></div>\n      <div *ngSwitchCase=\"'TEXT INPUT'\">\n        <div *ngIf=\"widget.formatted\">\n          <quill-editor [(ngModel)]=\"widget.text\" name=\"text\"></quill-editor>\n        </div>\n\n        <input *ngIf=\"!widget.formatted && (!widget.rows || widget.rows===1)\"\n               placeholder=\"{{widget.placeholder}}\" class=\"form-control\"/>\n\n        <textarea *ngIf=\"!widget.formatted && (widget.rows > 1)\"\n                  rows=\"{{widget.rows}}\" placeholder=\"{{widget.placeholder}}\"\n                  class=\"form-control\">{{widget.text}}</textarea>\n      </div>\n      <p *ngSwitchDefault><br><br></p>\n    </div>\n  </div>\n</div>\n\n<nav class=\"navbar fixed-bottom bc-grey\">\n  <div class=\"container-fluid\">\n    <div class=\"\">\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-play\"></i>\n      </a>\n      &nbsp;&nbsp;\n      <a routerLink=\"./\" class=\"text-black\">\n        <i class=\"fas fa-eye\"></i>\n      </a>\n    </div>\n    <div class=\"ml-auto\">\n      <a [routerLink]=\"['/user', userId]\" class=\"text-blue float-right\">\n        <i class=\"fas fa-user\"></i>\n      </a>\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 

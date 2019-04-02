@@ -16,8 +16,8 @@ export class UserService {
 
   // all functions return an observable, .subscribe whenever used
 
-  createUser(user: User) {
-    user._id = String(Math.floor(Math.random() * 1000) + 1);
+  createUser(user) {
+    // user._id = String(Math.floor(Math.random() * 1000) + 1);
     return this.http.post(this.baseUrl + '/api/user', user)
       .map((res: Response) => {
         return res.json();
@@ -46,7 +46,7 @@ export class UserService {
       });
   }
 
-  updateUser(userId: string, newUser: User) {
+  updateUser(userId: string, newUser) {
     return this.http.put(this.baseUrl + '/api/user/' + userId, newUser)
       .map((res: Response) => {
         return res.json();

@@ -11,8 +11,8 @@ export class PageService {
 
   constructor(private http: Http) {}
 
-  createPage(websiteId: string, page: Page) {
-    page._id = String(Math.floor(Math.random() * 1000) + 1);
+  createPage(websiteId: string, page) {
+    // page._id = String(Math.floor(Math.random() * 1000) + 1);
     page.websiteId = websiteId;
     return this.http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page)
       .map((res: Response) => {
@@ -34,7 +34,7 @@ export class PageService {
       });
   }
 
-  updatePage(pageId: string, newPage: Page) {
+  updatePage(pageId: string, newPage) {
     return this.http.put(this.baseUrl + '/api/page/' + pageId, newPage)
       .map((res: Response) => {
         return res.json();

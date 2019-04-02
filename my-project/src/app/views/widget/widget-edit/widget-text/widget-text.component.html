@@ -1,0 +1,58 @@
+<nav class="navbar fixed-top bc-grey">
+  <div class="container-fluid">
+    <div class="navbar-brand navbar-light">
+      <a routerLink="../" class="float-left text-black">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="./" class="text-grey">
+        Widget Edit
+      </a>
+    </div>
+    <a (click)="onEditWidget()" style="cursor: pointer" class="text-black">
+      <i class="fas fa-check"></i>
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  Text
+  <input [(ngModel)]="newWidgetText" class="form-control" placeholder="{{ widget.text }}"/>
+  Rows
+  <input [(ngModel)]="newWidgetRows" class="form-control" type="number" placeholder="{{ widget.rows }}"/>
+
+  <label for="Name">Name</label>
+  <div>
+    <input [(ngModel)]="newWidgetName"
+           type="text"
+           class="form-control"
+           id="Name"
+           name="name"
+           placeholder="Name">
+  </div>
+  Placeholder
+  <input [(ngModel)]="newWidgetPlaceholder" class="form-control" placeholder="{{ widget.placeholder }}" required/>
+  <p></p>
+  <div class="input-group">
+    <input type="text"
+           readonly
+           value="Formatted"
+           class="form-control"/>
+    <span class="input-group-addon">
+        <input [(ngModel)]="newWidgetFormatted"
+               type="checkbox"/>
+    </span>
+  </div>
+  <p></p>
+  <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
+</div>
+
+<nav class="navbar fixed-bottom bc-grey">
+  <div class="container-fluid">
+    <div class="ml-auto">
+      <a [routerLink]="['/user', userId]" class="text-blue float-right">
+        <i class="fas fa-user"></i>
+      </a>
+    </div>
+  </div>
+</nav>
