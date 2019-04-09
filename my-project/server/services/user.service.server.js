@@ -65,7 +65,7 @@ module.exports = app => {
     next();
   },
     passport.authenticate('facebook', {scope: 'email'}));
-  app.get("https://webdev-cs5610-zhenyuan.herokuapp.com/auth/facebook/callback", function (req, res, next) {
+  app.get("/auth/facebook/callback", function (req, res, next) {
     var authenticator = passport.authenticate('facebook', {
       successRedirect: req.session.returnTo,
       failureRedirect: '/'
