@@ -33,7 +33,7 @@ module.exports = app => {
     // clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: '9b84bcfec3b28d0f4172f6e326874072',
     // clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: "/auth/facebook/callback"
+    callbackURL: "https://webdev-cs5610-zhenyuan.herokuapp.com/auth/facebook/callback"
   };
   passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
   function facebookStrategy(token, refreshToken, profile, done) {
@@ -65,7 +65,7 @@ module.exports = app => {
     next();
   },
     passport.authenticate('facebook', {scope: 'email'}));
-  app.get("/auth/facebook/callback", function (req, res, next) {
+  app.get("https://webdev-cs5610-zhenyuan.herokuapp.com/auth/facebook/callback", function (req, res, next) {
     var authenticator = passport.authenticate('facebook', {
       successRedirect: req.session.returnTo,
       failureRedirect: '/'
