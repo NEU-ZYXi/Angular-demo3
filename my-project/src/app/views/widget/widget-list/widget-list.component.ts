@@ -10,7 +10,6 @@ import {Widget} from '../../../models/widget.model';
 })
 export class WidgetListComponent implements OnInit {
 
-  userId: string;
   pageId: string;
   widgets: Widget[];
 
@@ -20,7 +19,6 @@ export class WidgetListComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.pageId = params['pid'];
         }
       );

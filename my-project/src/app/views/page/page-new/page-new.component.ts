@@ -5,6 +5,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Page} from '../../../models/page.model';
 import {PageService} from '../../../services/page.service.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-page-new',
@@ -13,20 +14,18 @@ import {PageService} from '../../../services/page.service.client';
 })
 export class PageNewComponent implements OnInit {
 
-  userId: string;
   websiteId: string;
   newPage;
   newPageName: string = '';
   newPageTitle: string;
   newPageDescription: string;
 
-  constructor(private pageService: PageService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private pageService: PageService, private route: ActivatedRoute, private router: Router, private sharedService: SharedService) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.websiteId = params['wid'];
         }
       );

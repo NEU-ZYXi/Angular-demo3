@@ -11,7 +11,6 @@ import {WidgetService} from '../../../../services/widget.service.client';
 export class WidgetHtmlComponent implements OnInit {
 
   widgetId: string;
-  userId: string;
   pageId: string;
   widget;
   newWidget;
@@ -25,7 +24,6 @@ export class WidgetHtmlComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.widgetId = params['wgid'];
           this.pageId = params['pid'];
         }

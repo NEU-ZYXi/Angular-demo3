@@ -12,7 +12,6 @@ export class FlickrImageSearchComponent implements OnInit {
 
   websiteId: string;
   pageId: string;
-  userId: string;
   widgetId: string;
   photos: [any];
   error: string;
@@ -25,7 +24,6 @@ export class FlickrImageSearchComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.widgetId = params['wgid'];
           this.pageId = params['pid'];
           this.websiteId = params['wid'];
@@ -63,7 +61,7 @@ export class FlickrImageSearchComponent implements OnInit {
       .updateWidget(this.widgetId, widget)
       .subscribe(
         (data: any) => {
-          this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
+          this.router.navigate(['/user' + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
         }
       );
   }

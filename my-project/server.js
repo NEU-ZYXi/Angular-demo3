@@ -7,9 +7,17 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+const secret = !!process.env.SESSION_SECRET ? process.env.SESSION_SECRET : 'local_secret'
+app.use(session({secret: secret}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist/my-project')));

@@ -3,6 +3,7 @@ import {Page} from '../../../models/page.model';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-page-list',
@@ -11,17 +12,15 @@ import {Subscription} from 'rxjs';
 })
 export class PageListComponent implements OnInit {
 
-  userId: string;
   websiteId: string;
   pages: Page[];
 
-  constructor(private pageService: PageService, private route: ActivatedRoute) {}
+  constructor(private pageService: PageService, private route: ActivatedRoute, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.websiteId = params['wid'];
         }
       );

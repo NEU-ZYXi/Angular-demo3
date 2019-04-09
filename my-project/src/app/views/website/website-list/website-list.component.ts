@@ -3,6 +3,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {Website} from '../../../models/website.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-website-list',
@@ -14,15 +15,10 @@ export class WebsiteListComponent implements OnInit {
   userId: string;
   websites: Website[];
 
-  constructor(private websiteService: WebsiteService, private route: ActivatedRoute) { }
+  constructor(private websiteService: WebsiteService, private route: ActivatedRoute, private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.userId = params['uid'];
-        }
-      );
+    this.userId = this.sharedService.user._id;
     this.websiteService.findWebsitesByUser(this.userId)
       .subscribe(
         (websites: Website[]) => {

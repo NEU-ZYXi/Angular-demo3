@@ -9,6 +9,7 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.findUserById = findUserById;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
+userModel.findUserByFacebook = findUserByFacebook;
 
 module.exports = userModel;
 
@@ -35,5 +36,9 @@ function updateUser(id, user) {
 
 function deleteUser(id) {
   return userModel.findOneAndDelete(id);
+}
+
+function findUserByFacebook(facebook) {
+  return userModel.findOne({'facebook.id': facebook});
 }
 

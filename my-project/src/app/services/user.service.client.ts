@@ -5,6 +5,8 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import 'rxjs-compat/add/operator/map';
 import {environment} from '../../environments/environment';
+import {SharedService} from './shared.service.client';
+import {Router} from '@angular/router';
 
 // @Injectable() cannot be missed since here we have http in constructor
 @Injectable()
@@ -12,7 +14,7 @@ export class UserService {
 
   baseUrl = environment.baseUrl;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private sharedService: SharedService, private router: Router) {}
 
   // all functions return an observable, .subscribe whenever used
 
@@ -58,5 +60,46 @@ export class UserService {
       .map((res: Response) => {
         return res.json();
       });
+  }
+
+  login(username: string, password: string) {
+    const body = {
+      username: username,
+      password: password
+    };
+    return this.http.post(this.baseUrl + '/api/login', body, {withCredentials: true})
+      .map((res: Response) => {
+        return res.text() ? res.json() : undefined;
+      });
+  }
+
+  logout() {
+    return this.http.post(this.baseUrl + '/api/logout', '', {withCredentials: true});
+  }
+
+  register(username, password){
+    const user = {
+      username: username,
+      password: password
+    };
+    return this.http.post(this.baseUrl + '/api/register', user, {withCredentials: true})
+      .map((res: Response) => {
+        return res.json();
+      });
+  }
+
+  loggedIn() {
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', {withCredentials: true})
+      .map((res: Response) => {
+        const user = res.json();
+        if (user != 0) {
+          this.sharedService.user = user;
+          // console.log("service", this.sharedService.user);
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
   }
 }

@@ -11,7 +11,6 @@ import {WidgetService} from '../../../../services/widget.service.client';
 export class WidgetImageComponent implements OnInit {
 
   widgetId: string;
-  userId: string;
   pageId: string;
   websiteId: string;
   widget;
@@ -29,7 +28,6 @@ export class WidgetImageComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.widgetId = params['wgid'];
           this.pageId = params['pid'];
           this.websiteId = params['wid'];

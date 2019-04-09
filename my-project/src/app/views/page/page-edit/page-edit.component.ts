@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Page} from '../../../models/page.model';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -10,7 +11,6 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 })
 export class PageEditComponent implements OnInit {
 
-  userId: string;
   websiteId: string;
   pageId: string;
   page = { name: "", title: "", websiteId: "", description: ""};
@@ -21,7 +21,6 @@ export class PageEditComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
         }

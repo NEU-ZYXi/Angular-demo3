@@ -11,7 +11,6 @@ import {Widget} from '../../../../models/widget.model';
 export class WidgetTextComponent implements OnInit {
 
   widgetId: string;
-  userId: string;
   pageId: string;
   widget;
   newWidget;
@@ -28,7 +27,6 @@ export class WidgetTextComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.widgetId = params['wgid'];
           this.pageId = params['pid'];
         }

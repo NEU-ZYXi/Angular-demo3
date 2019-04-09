@@ -10,7 +10,6 @@ import {WidgetService} from '../../../services/widget.service.client';
 })
 export class WidgetChooserComponent implements OnInit, OnDestroy {
 
-  userId: string;
   pageId: string;
   widgetId: string;
   widgetType: string;
@@ -24,7 +23,6 @@ export class WidgetChooserComponent implements OnInit, OnDestroy {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.pageId = params['pid'];
           this.widgetId = params['wgid'];
         }

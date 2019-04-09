@@ -12,7 +12,6 @@ import {Subscription} from 'rxjs';
 export class WidgetEditComponent implements OnInit, OnDestroy {
 
   widgetId: string;
-  userId: string;
   widgetChosen: string;
   widget: Widget;
   subscription: Subscription;
@@ -23,7 +22,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['uid'];
           this.widgetId = params['wgid'];
         }
       );
