@@ -2558,8 +2558,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3200'
-    // baseUrl: 'https://webdev-cs5610-zhenyuan.herokuapp.com'
+    // baseUrl: 'http://localhost:3200'
+    baseUrl: 'https://webdev-cs5610-zhenyuan.herokuapp.com'
 };
 /*
  * For easier debugging in development mode, you can import the following file
